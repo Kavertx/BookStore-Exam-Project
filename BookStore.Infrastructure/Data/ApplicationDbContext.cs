@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using BookStore.Infrastructure.Data.Models;
 
-namespace BookStore.Data
+namespace BookStore.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
