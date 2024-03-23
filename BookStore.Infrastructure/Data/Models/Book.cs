@@ -27,5 +27,6 @@ namespace BookStore.Infrastructure.Data.Models
         [Required]
         public bool InStock { get; set; }
 
+        public byte[]? Image { get; set; }
     }
 }
