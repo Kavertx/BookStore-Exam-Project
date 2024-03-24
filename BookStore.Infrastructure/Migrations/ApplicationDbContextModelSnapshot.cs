@@ -35,7 +35,13 @@ namespace BookStore.Infrastructure.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClientId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -52,8 +58,14 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -62,26 +74,35 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("ClientId");
 
+                    b.HasIndex("ClientId1");
+
                     b.HasIndex("GenreId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.BookGenre", b =>
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Category", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.HasKey("BookId", "GenreId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasIndex("GenreId");
+                    b.HasKey("Id");
 
-                    b.ToTable("BooksGenres");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
@@ -346,34 +367,31 @@ namespace BookStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
                         .WithMany("Books")
                         .HasForeignKey("ClientId");
 
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
+                        .WithMany("FavouriteBooks")
+                        .HasForeignKey("ClientId1");
+
                     b.HasOne("BookStore.Infrastructure.Data.Models.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Genre");
-                });
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Order", null)
+                        .WithMany("Books")
+                        .HasForeignKey("OrderId");
 
-            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.BookGenre", b =>
-                {
-                    b.HasOne("BookStore.Infrastructure.Data.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookStore.Infrastructure.Data.Models.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
+                    b.Navigation("Category");
 
                     b.Navigation("Genre");
                 });
@@ -455,7 +473,19 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     b.Navigation("Books");
 
+                    b.Navigation("FavouriteBooks");
+
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Genre", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Order", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

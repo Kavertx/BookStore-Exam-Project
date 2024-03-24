@@ -28,5 +28,12 @@ namespace BookStore.Infrastructure.Data.Models
         public bool InStock { get; set; }
 
         public byte[]? Image { get; set; }
+        [Range(BookConstants.RatingMin,BookConstants.RatingMax)]
+        public int Rating { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; } = null!;
     }
 }

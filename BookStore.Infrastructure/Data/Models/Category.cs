@@ -3,13 +3,13 @@ using static BookStore.Infrastructure.Constants.DataConstants;
 
 namespace BookStore.Infrastructure.Data.Models
 {
-    public class Genre
+    public class Category
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(GenreConstants.NameMax)]
+        [MaxLength(CategoryConstants.NameMax)]
         public string Name { get; set; } = string.Empty;
-        public ICollection<Book> Books { get; set; } = new List<Book>();
+        ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }

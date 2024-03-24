@@ -72,16 +72,10 @@ namespace BookStore.Infrastructure.Migrations
                     AuthorName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: false),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Books_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Books_Genres_GenreId",
                         column: x => x.GenreId,
@@ -113,11 +107,6 @@ namespace BookStore.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_ClientId",
-                table: "Books",
-                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_GenreId",

@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BookStore.Infrastructure/Migrations/20240324095711_RemovedBookGenreTableAndAddedCategoryTable.Designer.cs

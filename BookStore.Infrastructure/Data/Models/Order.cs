@@ -14,6 +14,6 @@ namespace BookStore.Infrastructure.Data.Models
         public Client Buyer { get; set; } = null!;
         [Required]
         public DateTime TimeOfOrder {  get; set; } = DateTime.Now;
-        ICollection<Book> Books { get; set; } = new List<Book>();
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }
