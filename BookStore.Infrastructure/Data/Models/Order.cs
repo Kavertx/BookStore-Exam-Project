@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using static BookStore.Infrastructure.Constants.DataConstants;
 
 namespace BookStore.Infrastructure.Data.Models
 {
@@ -21,6 +14,6 @@ namespace BookStore.Infrastructure.Data.Models
         public Client Buyer { get; set; } = null!;
         [Required]
         public DateTime TimeOfOrder {  get; set; } = DateTime.Now;
-        ICollection<Book> Books { get; set; } = new List<Book>();
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }

@@ -24,7 +24,6 @@
     <Folder Include="Components\" />
     <Folder Include="Attributes\" />
     <Folder Include="ModelBinders\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
   <ItemGroup>

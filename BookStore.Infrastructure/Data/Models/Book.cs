@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BookStore.Infrastructure.Constants.DataConstants;
 
 namespace BookStore.Infrastructure.Data.Models
@@ -32,5 +27,8 @@ namespace BookStore.Infrastructure.Data.Models
         [Required]
         public bool InStock { get; set; }
 
+        public string ImageUrl { get; set; } = string.Empty;
+        [Range(BookConstants.RatingMin,BookConstants.RatingMax)]
+        public int Rating { get; set; }
     }
 }

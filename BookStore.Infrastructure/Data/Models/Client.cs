@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Infrastructure.Data.Models
 {
@@ -19,5 +14,6 @@ namespace BookStore.Infrastructure.Data.Models
         public IdentityUser User { get; set; } = null!;
         public ICollection<Order> Orders { get; set; } = new List<Order>();
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        public ICollection<Book> FavouriteBooks { get; set; } =new List<Book>();
     }
 }

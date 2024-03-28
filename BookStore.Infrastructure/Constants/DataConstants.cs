@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookStore.Infrastructure.Constants
+﻿namespace BookStore.Infrastructure.Constants
 {
     public static class DataConstants
     {
@@ -18,6 +12,8 @@ namespace BookStore.Infrastructure.Constants
             public const string PriceMax = "1000.00";
             public const int AuthorNameMax = 150;
             public const int AuthorNameMin = 3;
+            public const int RatingMax = 5;
+            public const int RatingMin = 1;
         }
         public static class GenreConstants
         {
@@ -27,6 +23,11 @@ namespace BookStore.Infrastructure.Constants
         public static class OrderConstants 
         {
 
+        }
+        public static class CategoryConstants
+        {
+            public const int NameMax = 50;
+            public const int NameMin = 5;
         }
     }
 }
