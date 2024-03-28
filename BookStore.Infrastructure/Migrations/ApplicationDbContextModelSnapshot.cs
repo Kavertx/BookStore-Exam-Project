@@ -80,7 +80,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasData(
                         new
@@ -725,7 +725,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Genre", b =>
@@ -743,7 +743,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasData(
                         new
@@ -901,7 +901,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
