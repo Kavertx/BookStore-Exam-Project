@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore", "BookStore.csproj", "{0F64E095-B71E-48E3-8274-475791961099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore", "BookStore.csproj", "{0F64E095-B71E-48E3-8274-475791961099}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Core", "..\BookStore.Core\BookStore.Core.csproj", "{8417B022-8BB4-48EE-BC9F-1EF50D01CEA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Core", "..\BookStore.Core\BookStore.Core.csproj", "{8417B022-8BB4-48EE-BC9F-1EF50D01CEA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure", "..\BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{003B7F15-BD31-44C7-B4F7-599162424AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Infrastructure", "..\BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{003B7F15-BD31-44C7-B4F7-599162424AF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
