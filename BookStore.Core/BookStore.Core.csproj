@@ -10,10 +10,4 @@
     <ProjectReference Include="..\BookStore.Infrastructure\BookStore.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
