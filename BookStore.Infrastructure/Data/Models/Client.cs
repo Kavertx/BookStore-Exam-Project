@@ -6,7 +6,7 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Client
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
         [Required]
         public string UserId { get; set; } = string.Empty;

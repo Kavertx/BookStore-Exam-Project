@@ -7,7 +7,6 @@ namespace BookStore.Infrastructure.Data.Models
     {
         [Key]
         public int Id { get; set; }
-        // Is this supposed to be the AspNetUser Id or Client Id? 
         [Required]
         public int BuyerId { get; set; }
         [ForeignKey(nameof(BuyerId))]
@@ -15,5 +14,8 @@ namespace BookStore.Infrastructure.Data.Models
         [Required]
         public DateTime TimeOfOrder {  get; set; } = DateTime.Now;
         public ICollection<Book> Books { get; set; } = new List<Book>();
+		[Required]
+		[Column(TypeName = "decimal(18,2)")]
+		public decimal TotalPrice { get; set; }
     }
 }
