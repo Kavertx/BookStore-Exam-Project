@@ -10,13 +10,12 @@ namespace BookStore.Core.Models.Book
 {
     public class AllBooksQueryModel
     {
-        public int BooksPerPage { get; } = 15;
-        public string Genre { get; set; }
-        public string SearchTerm { get; set; }
-        public BookSorting Sorting { get; set; }
+        public int BooksPerPage { get; } = 16;
+        public string? GenreName { get; set; } = null;
+        public string SearchTerm { get; set; } = string.Empty;
+        public BookSorting Sorting { get; set; } = 0;
         public int CurrentPage { get; set; } = 1;
         public int TotalBooksCount { get; set; }
-        public  IEnumerable<BookGenreServiceModel> Genres { get; set; }
-        public BookQueryServiceModel Books { get; set; } 
+        public IEnumerable<BookCardViewModel> Books { get; set; } = new List<BookCardViewModel>();  
     }
 }

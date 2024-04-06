@@ -17,10 +17,19 @@ namespace BookStore.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Index()
-        { 
-            var model = await bookService.AllAsync();
-            return View(model);
+        public async Task<IActionResult> Index([FromQuery]AllBooksQueryModel query)
+        {
+
+            var model = await bookService.AllAsync(
+                query.GenreName,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                query.BooksPerPage
+                );
+            query.TotalBooksCount = model.TotalBooksCount;
+            query.Books = model.Books;
+            return View(query);
         }
 
         [HttpGet]
@@ -28,6 +37,23 @@ namespace BookStore.Controllers
         {
             var model = await clientService.AllFavouriteBooksAsync(User.Id());
             return View(model);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!await bookService.BookExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
+            var model = await bookService.BookDetailsByIdAsync(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyBooks()
+        {
+            return View();
         }
     }
 }

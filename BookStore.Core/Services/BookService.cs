@@ -20,12 +20,14 @@ namespace BookStore.Core.Services
             repository = _repository;           
         }
 
-		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15)
+		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16)
 		{
 			var booksToShow = repository.AllReadOnly<Book>();
+			
 			if (string.IsNullOrEmpty(genre) == false)
 			{
-				booksToShow = booksToShow.Where(b => b.Genre.Name == genre);
+                var genreOfBook = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genre);
+                booksToShow = booksToShow.Where(b => b.GenreId == genreOfBook.Id);
 			}
 
 			if (string.IsNullOrEmpty(searchTerm) == false)
@@ -50,7 +52,7 @@ namespace BookStore.Core.Services
 				.OrderBy(b=>b.InStock==true)
 				.ThenBy(b=>b.Title),
 				BookSorting.Rating => booksToShow
-					.OrderBy (b=>b.Rating)
+					.OrderByDescending (b=>b.Rating)
 					.ThenBy (b=>b.Title),
 					_ => booksToShow.OrderBy(b=>b.Title)
 			};
@@ -88,7 +90,9 @@ namespace BookStore.Core.Services
 		public async Task<BookDetailsViewModel> BookDetailsByIdAsync(int id)
 		{
 			var bookById = await repository.GetByIdAsync<Book>(id);
-			return new BookDetailsViewModel
+			bookById.Genre = await repository.GetByIdAsync<Genre>(bookById.GenreId)?? null;
+
+            return new BookDetailsViewModel
 			{
 				Author = bookById.AuthorName,
 				Description = bookById.Description,
@@ -98,7 +102,8 @@ namespace BookStore.Core.Services
 				InStock = bookById.InStock,
 				Price = bookById.Price,
 				Rating = bookById.Rating,
-				Title = bookById.Title
+				Title = bookById.Title,
+				
 			};
 			
 		}
@@ -148,5 +153,11 @@ namespace BookStore.Core.Services
 					Title = b.Title,
 				}).ToListAsync();
 		}
-	}
+
+        public async Task<string> GetGenreNameByIdAsync(int genreId)
+        {
+			var genre = await repository.GetByIdAsync<Genre>(genreId);
+            return genre.Name;
+        }
+    }
 }

@@ -1,10 +1,13 @@
 ﻿@model BookCardViewModel
 <div class="col-lg-3 col-md-4 col-sm-6">
-    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+    
     <div class="card">
-        <img src="@Model.ImageUrl" class="card-img-top" alt="Item Image">
+        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+        <img src="@Model.ImageUrl" class="card-img-top" alt="Item Image"></a>
         <div class="card-body">
-            <h5 class="card-title">@Model.Title</h5>
+            <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+                <h5 class="card-title">@Model.Title</h5>
+            </a>
             <p class="card-text">@Model.Author</p>
             <p class="card-text">$@Model.Price</p>
             <p class="card-text">Rating: @Model.Rating</p>
@@ -18,5 +21,5 @@
             }
 
         </div>
-    </div></a>
+    </div>
 </div>
