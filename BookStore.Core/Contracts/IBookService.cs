@@ -20,6 +20,7 @@ namespace BookStore.Core.Contracts
 		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15);
 
 		Task<IEnumerable<string>> AllGenresNamesAsync();
+		Task<string> GetGenreNameByIdAsync(int genreId);
 
 		Task<bool> BookExistsByIdAsync(int id);
 		Task<BookDetailsViewModel> BookDetailsByIdAsync(int id);

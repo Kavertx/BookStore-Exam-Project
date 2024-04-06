@@ -8,5 +8,14 @@ namespace BookStore.Controllers
         {
             return View();
         }
+
+        public IActionResult Details()
+        {
+            return View();
+        }
+        public IActionResult Cart()
+        {
+            return View();
+        }
     }
 }
