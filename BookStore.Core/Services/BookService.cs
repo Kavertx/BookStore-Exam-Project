@@ -26,7 +26,7 @@ namespace BookStore.Core.Services
 			
 			if (string.IsNullOrEmpty(genre) == false)
 			{
-                var genreOfBook = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genre);
+                var genreOfBook = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genre) ?? throw new NullReferenceException("Genre with this id does not exist"); ;
                 booksToShow = booksToShow.Where(b => b.GenreId == genreOfBook.Id);
 			}
 
@@ -89,8 +89,8 @@ namespace BookStore.Core.Services
 
 		public async Task<BookDetailsViewModel> BookDetailsByIdAsync(int id)
 		{
-			var bookById = await repository.GetByIdAsync<Book>(id);
-			bookById.Genre = await repository.GetByIdAsync<Genre>(bookById.GenreId)?? null;
+			var bookById = await repository.GetByIdAsync<Book>(id) ?? throw new NullReferenceException("Book does not exist with this id");
+            bookById.Genre = await repository.GetByIdAsync<Genre>(bookById.GenreId)?? throw new NullReferenceException("Book does not exist");
 
             return new BookDetailsViewModel
 			{
@@ -114,9 +114,24 @@ namespace BookStore.Core.Services
 			return genre!=null;
 		}
 
-		public Task<int> CreateAsync(BookFormModel model)
+		public async Task<int> CreateAsync(BookFormModel model)
 		{
-			throw new NotImplementedException();
+			Book book = new Book()
+			{
+				AuthorName = model.AuthorName,
+				Description = model.Description,
+				GenreId = model.GenreId,
+				ImageUrl = model.ImageUrl,
+				InStock = true,
+				Price = model.Price,
+				Rating = model.Rating,
+				Title = model.Title,
+			};
+
+            await repository.AddAsync<Book>(book);
+			await repository.SaveChangesAsync();
+			return book.Id;
+
 		}
 
 		public Task DeleteAsync(int bookId)
@@ -124,10 +139,10 @@ namespace BookStore.Core.Services
 			throw new NotImplementedException();
 		}
 
-		public Task EditAsync(int houseId, BookFormModel model)
-		{
-			throw new NotImplementedException();
-		}
+		//public Task EditAsync(int houseId, BookFormModel model)
+		//{
+		//	throw new NotImplementedException();
+		//}
 
 		public async Task<bool> BookExistsByIdAsync(int id)
 		{
@@ -156,7 +171,7 @@ namespace BookStore.Core.Services
 
         public async Task<string> GetGenreNameByIdAsync(int genreId)
         {
-			var genre = await repository.GetByIdAsync<Genre>(genreId);
+			var genre = await repository.GetByIdAsync<Genre>(genreId) ?? throw new NullReferenceException("Genre with this id does not exist");
             return genre.Name;
         }
     }

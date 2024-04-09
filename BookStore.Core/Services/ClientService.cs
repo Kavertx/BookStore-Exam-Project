@@ -47,5 +47,15 @@ namespace BookStore.Core.Services
             return (await repository.AllReadOnly<Client>()
                 .FirstOrDefaultAsync(c => c.UserId == userId))?.Id; 
         }
+        public async Task<Client?> GetClientByIdAsync(int id)
+        {
+            return await repository.GetByIdAsync<Client>(id);
+        }
+
+        public async Task<IEnumerable<Book>> GetClientAddedBooksAsync(int clientId)
+        {
+            Client client = await repository.GetByIdAsync<Client>(clientId)?? throw new NullReferenceException("Client with such id does not exist");
+            return client.MyBooks;
+        }
     }
 }

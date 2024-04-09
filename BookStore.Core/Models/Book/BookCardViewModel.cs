@@ -18,7 +18,7 @@ namespace BookStore.Core.Models.Book
         public string Author { get; set; } = string.Empty;
         [Required]
         public string ImageUrl { get; set; } = string.Empty;
-        public decimal Rating { get; set; }
+        public int Rating { get; set; }
         [Display(Name = "Currently in stock")]
         public bool InStock { get; set; }
         public decimal Price { get; set; }

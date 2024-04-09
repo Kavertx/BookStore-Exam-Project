@@ -1,4 +1,5 @@
 ﻿using BookStore.Core.Models.Book;
+using BookStore.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace BookStore.Core.Contracts
     {
         Task<BookQueryServiceModel> AllFavouriteBooksAsync(string userId);
         Task<int?> GetClientIdAsync(string userId);
+        Task<Client?> GetClientByIdAsync(int id);
+        Task<IEnumerable<Book>> GetClientAddedBooksAsync(int clientId);
     }
 }
