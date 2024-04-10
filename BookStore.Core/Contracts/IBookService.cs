@@ -24,11 +24,8 @@ namespace BookStore.Core.Contracts
 
 		Task<bool> BookExistsByIdAsync(int id);
 		Task<BookDetailsViewModel> BookDetailsByIdAsync(int id);
-
-		//Task EditAsync(int bookId, BookFormModel model);
-
-		Task<BookFormModel?> GetBookFormModelByIdAsync(int id);
 		Task<IEnumerable<BookCardViewModel>> GetBooksByGenreAsync(int genreId);
 		Task DeleteAsync(int bookId);
+		Task <int?> GetGenreIdByNameAsync(string genreName);
 	}
 }

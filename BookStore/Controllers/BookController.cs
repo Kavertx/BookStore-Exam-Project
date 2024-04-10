@@ -51,7 +51,7 @@ namespace BookStore.Controllers
         {
             var model = new AllBooksQueryModel();
             int clientId = (int)await clientService.GetClientIdAsync(User.Id());
-            IEnumerable<Book> clientBooks = await clientService.GetClientAddedBooksAsync(clientId);
+            IEnumerable<Infrastructure.Data.Models.Book> clientBooks = await clientService.GetClientAddedBooksAsync(clientId);
             model.Books = clientBooks.Select(b => new BookCardViewModel()
             {
                 Author = b.AuthorName,

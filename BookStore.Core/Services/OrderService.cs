@@ -1,4 +1,5 @@
 ﻿using BookStore.Core.Contracts;
+using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Order;
 using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
@@ -32,6 +33,18 @@ namespace BookStore.Core.Services
                     TotalPrice = o.TotalPrice,
                 })
                 .ToListAsync();   
+        }
+
+        public async Task<int> CreateAsync(List<Book> books, int clientId, DateTime dateTime, decimal totalPrice)
+        {
+            await repository.AddAsync<Order>(new Order()
+            {
+                Books = books.AsQueryable().AsNoTracking().ToList(),
+                BuyerId = clientId,
+                TimeOfOrder = dateTime,
+                TotalPrice = totalPrice
+            });
+            return await repository.SaveChangesAsync();
         }
 
         public async Task<OrderViewModel> GetOrderByIdAsync(int orderId)

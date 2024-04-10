@@ -81,14 +81,61 @@
 {
     <h2 class="text-center">No books found by the given criteria!</h2>
 }
-        <!-- Main Content -->
-        <div class="col-lg-10">
-            <div class="row">
-                @foreach (var book in Model.Books)
-                {
-                    <partial name="_BookPartial" model="@book" />
-                }
+<!-- Main Content -->
+<div class="col-lg-10">
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <form class="add-to-cart-form">
+                        <partial name="_BookPartial" model="@book" />
+                        @if (book.InStock)
+                        {
+                            <input type="hidden" name="bookId" value=@book.Id>
+                            <!-- Button to add book to cart -->
+                            <button class="btn btn-outline-success" type="submit">Add to Cart</button>
+                        }
+                    </form>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addToCartForms = document.querySelectorAll('.add-to-cart-form');
+        addToCartForms.forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = new FormData(form); // Create form data object
+                var bookId = formData.get('bookId'); // Get book ID from form data
+
+                // Send AJAX request to server using Fetch API
+                fetch('/Order/AddToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'bookId' : bookId
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Request was successful, display success message
+                            alert('Book added to cart successfully!');
+                        } else {
+                            // Request failed, display error message
+                            alert('Error adding book to cart: ' + response.statusText);
+                        }
+                    })
+                    .catch(error => {
+                        // Handle network errors
+                        console.error('Network error:', error);
+                    });
+            });
+        });
+    });
+</script>
+        

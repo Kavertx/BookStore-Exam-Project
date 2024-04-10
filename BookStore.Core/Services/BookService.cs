@@ -4,6 +4,7 @@ using BookStore.Core.Models.Book;
 using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,7 +117,7 @@ namespace BookStore.Core.Services
 
 		public async Task<int> CreateAsync(BookFormModel model)
 		{
-			Book book = new Book()
+            Book book = new Book()
 			{
 				AuthorName = model.AuthorName,
 				Description = model.Description,
@@ -134,10 +135,11 @@ namespace BookStore.Core.Services
 
 		}
 
-		public Task DeleteAsync(int bookId)
+		public async Task DeleteAsync(int bookId)
 		{
-			throw new NotImplementedException();
-		}
+            await repository.DeleteAsync<Book>(bookId);
+            await repository.SaveChangesAsync();
+        }
 
 		//public Task EditAsync(int houseId, BookFormModel model)
 		//{
@@ -147,11 +149,6 @@ namespace BookStore.Core.Services
 		public async Task<bool> BookExistsByIdAsync(int id)
 		{
 			return (await repository.GetByIdAsync<Book>(id)) != null;
-		}
-
-		public Task<BookFormModel?> GetBookFormModelByIdAsync(int id)
-		{
-			throw new NotImplementedException();
 		}
 
 		public async Task<IEnumerable<BookCardViewModel>> GetBooksByGenreAsync(int genreId)
@@ -173,6 +170,12 @@ namespace BookStore.Core.Services
         {
 			var genre = await repository.GetByIdAsync<Genre>(genreId) ?? throw new NullReferenceException("Genre with this id does not exist");
             return genre.Name;
+        }
+
+        public async Task<int?> GetGenreIdByNameAsync(string genreName)
+        {
+			var genre = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genreName);
+			return genre?.Id;
         }
     }
 }
