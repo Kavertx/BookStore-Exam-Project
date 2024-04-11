@@ -6,6 +6,7 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Client
     {
+        //should add Username upon registration for reviews later I think
         [Key]
         public int Id { get; set; }
         [Required]

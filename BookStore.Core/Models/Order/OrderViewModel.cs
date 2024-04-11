@@ -16,5 +16,6 @@ namespace BookStore.Core.Models.Order
         public ICollection<BookInOrderViewModel> Books { get; set; } = null!;
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
+        public int BooksOrdered {  get; set; }
     }
 }

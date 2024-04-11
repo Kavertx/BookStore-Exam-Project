@@ -1,6 +1,10 @@
 ﻿@model List<BookInOrderViewModel>
 
-<h2>Shopping Cart</h2>
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>@ViewBag.Title</h2>
 
 @if (Model != null && Model.Count > 0)
 {
@@ -102,6 +106,8 @@ else
                                 // Order placed successfully, handle response if needed
                                 console.log('Order placed successfully!');
                                 alert('Order placed successfully!');
+                                window.location.href = '/order/index';
+                                
                                 // Optionally, you can redirect to a confirmation page or update UI
                             } else {
                                 // Error occurred while placing order, handle errors if needed

@@ -22,26 +22,20 @@ namespace BookStore.Core.Services
             clientService = _clientService;
         }
 
-        public async Task<ICollection<OrderItemModel>> AllClientOrdersAsync(string userId)
+        public async Task<ICollection<Order>> AllClientOrdersAsync(string userId)
         {
             var clientId = await clientService.GetClientIdAsync(userId);
-            return await repository.AllReadOnly<Order>().Where(o=>o.BuyerId ==clientId)
-                .Select(o=> new OrderItemModel()
-                {
-                    Id = o.Id,
-                    TimeOfOrder = o.TimeOfOrder,
-                    TotalPrice = o.TotalPrice,
-                })
-                .ToListAsync();   
+            return await repository.AllReadOnly<Order>().Where(o => o.BuyerId == clientId).ToListAsync();
         }
 
-        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice)
+        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks)
         {
             await repository.AddAsync<Order>(new Order()
             {
                 BuyerId = clientId,
                 TimeOfOrder = dateTime,
-                TotalPrice = totalPrice
+                TotalPrice = totalPrice,
+                NumberOfBooks = numberOfBooks
             });
             return await repository.SaveChangesAsync();
         }

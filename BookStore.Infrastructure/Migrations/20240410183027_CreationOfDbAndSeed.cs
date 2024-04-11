@@ -98,7 +98,7 @@ namespace BookStore.Infrastructure.Migrations
                         column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Books_Orders_OrderId",
                         column: x => x.OrderId,

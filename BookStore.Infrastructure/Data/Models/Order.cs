@@ -5,6 +5,7 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Order
     {
+        //maybe having GUID as Id would make more sense here
         [Key]
         public int Id { get; set; }
         [Required]
@@ -17,5 +18,7 @@ namespace BookStore.Infrastructure.Data.Models
 		[Required]
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal TotalPrice { get; set; }
+        [Required]
+        public int NumberOfBooks { get; set; }
     }
 }
