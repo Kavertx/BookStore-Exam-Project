@@ -1,0 +1,120 @@
+﻿@model List<BookInOrderViewModel>
+
+<h2>Shopping Cart</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <form class="remove-from-cart-form">
+                    <td><img src="@book.ImageUrl" class="card-img-top small-image" alt="Book Image"></td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Price</td>
+                    <td>
+                        <!-- Add remove button -->
+                        <input type="hidden" name="bookId" value=@book.Id>
+                        <button class="btn btn-outline-danger" type="submit">Remove from Cart</button>
+                    </td>
+                    </form>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form id="order-form" action="/Order/PlaceOrder" method="post">
+
+        <button class="btn btn-primary" type="submit">Purchase</button>
+    </form>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var removeFromCartForms = document.querySelectorAll('.remove-from-cart-form');
+            removeFromCartForms.forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    var formData = new FormData(form); // Create form data object
+                    var bookId = formData.get('bookId');
+
+                    // Send AJAX request to server using Fetch API
+                    fetch('/Order/RemoveFromCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'bookId' : bookId
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Book removed successfully, optionally update UI
+                                console.log('Book removed from cart successfully!');
+                                window.location.reload(); // Refresh page to update cart
+                                
+                            } else {
+                                // Error occurred while removing book
+                                console.error('Error removing book from cart:', response.statusText);
+                                alert('Error removing book from cart');
+                            }
+                        })
+                        .catch(error => {
+                            // Handle network errors
+                            console.error('Network error:', error);
+                        });
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // Send AJAX request to server using Fetch API
+                    fetch('/Order/CreateOrder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        // Empty body as we don't need to send any data
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Order placed successfully, handle response if needed
+                                console.log('Order placed successfully!');
+                                alert('Order placed successfully!');
+                                // Optionally, you can redirect to a confirmation page or update UI
+                            } else {
+                                // Error occurred while placing order, handle errors if needed
+                                console.error('Error placing order:', response.statusText);
+                                alert('Error placing order');
+                            }
+                        })
+                        .catch(error => {
+                            // Handle network errors
+                            console.error('Network error:', error);
+                        });
+                });
+            }
+        });
+    </script>
+}

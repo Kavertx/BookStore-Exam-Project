@@ -1,8 +1,10 @@
 ﻿using BookStore.Core.Contracts;
 using BookStore.Core.Models.Book;
 using BookStore.Extensions;
+using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers
 {
@@ -33,12 +35,6 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Favourites()
-        {
-            var model = await clientService.AllFavouriteBooksAsync(User.Id());
-            return View(model);
-        }
-        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
@@ -53,7 +49,57 @@ namespace BookStore.Controllers
         [HttpGet]
         public async Task<IActionResult> MyBooks()
         {
-            return View();
+            var model = new AllBooksQueryModel();
+            int clientId = (int)await clientService.GetClientIdAsync(User.Id());
+            IEnumerable<Infrastructure.Data.Models.Book> clientBooks = await clientService.GetClientAddedBooksAsync(clientId);
+            model.Books = clientBooks.Select(b => new BookCardViewModel()
+            {
+                Author = b.AuthorName,
+                Id = b.Id,
+                ImageUrl = b.ImageUrl,
+                InStock = b.InStock,
+                Price = b.Price,
+                Rating = b.Rating,
+                Title = b.Title,
+            }).ToList();
+            model.TotalBooksCount = model.Books.Count();
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var model = new BookFormModel();
+            model.Genres = await bookService.AllGenresAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(BookFormModel model)
+        {
+            if(!await bookService.GenreExistsAsync(model.GenreId))
+            {
+                ModelState.AddModelError(nameof(model.GenreId), "Genre does not exist");
+            }
+            if (!ModelState.IsValid)
+            {
+                model.Genres = await bookService.AllGenresAsync();
+                return View(model);
+            }
+            Client client;
+            int clientId = await clientService.GetClientIdAsync(User.Id()) ?? throw new NullReferenceException("Client does not exist");
+            await bookService.CreateAsync(model);
+            client = await clientService.GetClientByIdAsync(clientId) ?? throw new NullReferenceException("Client does not exist");
+            client.MyBooks.Add(new Book()
+            {
+                AuthorName = model.AuthorName,
+                Description = model.Description,
+                GenreId = model.GenreId,
+                ImageUrl = model.ImageUrl,
+                InStock = true,
+                Price = model.Price,
+                Rating = model.Rating,
+                Title = model.Title,
+            });
+            return RedirectToAction(nameof(Index));
         }
     }
 }

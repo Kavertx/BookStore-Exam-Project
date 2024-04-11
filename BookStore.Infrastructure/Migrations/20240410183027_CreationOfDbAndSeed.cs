@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookStore.Infrastructure.Migrations
 {
-    public partial class CreateDataModelsAndSeedDatabase : Migration
+    public partial class CreationOfDbAndSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,8 @@ namespace BookStore.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuyerId = table.Column<int>(type: "int", nullable: false),
-                    TimeOfOrder = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TimeOfOrder = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {

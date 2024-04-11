@@ -80,7 +80,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
 
                     b.HasData(
                         new
@@ -725,7 +725,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Genre", b =>
@@ -743,7 +743,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -904,7 +904,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1112,11 +1112,11 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
                     b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
-                        .WithMany("Books")
+                        .WithMany("FavouriteBooks")
                         .HasForeignKey("ClientId");
 
                     b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
-                        .WithMany("FavouriteBooks")
+                        .WithMany("MyBooks")
                         .HasForeignKey("ClientId1");
 
                     b.HasOne("BookStore.Infrastructure.Data.Models.Genre", "Genre")
@@ -1207,9 +1207,9 @@ namespace BookStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
                 {
-                    b.Navigation("Books");
-
                     b.Navigation("FavouriteBooks");
+
+                    b.Navigation("MyBooks");
 
                     b.Navigation("Orders");
                 });

@@ -13,7 +13,7 @@ namespace BookStore.Core.Contracts
 
 		Task<IEnumerable<BookGenreServiceModel>> AllGenresAsync();
 
-		Task<bool> GenreExistsAsync(int categoryId);
+		Task<bool> GenreExistsAsync(int genreId);
 
 		Task<int> CreateAsync(BookFormModel model);
 
@@ -24,11 +24,8 @@ namespace BookStore.Core.Contracts
 
 		Task<bool> BookExistsByIdAsync(int id);
 		Task<BookDetailsViewModel> BookDetailsByIdAsync(int id);
-
-		Task EditAsync(int houseId, BookFormModel model);
-
-		Task<BookFormModel?> GetBookFormModelByIdAsync(int id);
 		Task<IEnumerable<BookCardViewModel>> GetBooksByGenreAsync(int genreId);
 		Task DeleteAsync(int bookId);
+		Task <int?> GetGenreIdByNameAsync(string genreName);
 	}
 }

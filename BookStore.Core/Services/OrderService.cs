@@ -1,4 +1,5 @@
 ﻿using BookStore.Core.Contracts;
+using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Order;
 using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
@@ -34,26 +35,25 @@ namespace BookStore.Core.Services
                 .ToListAsync();   
         }
 
-        public async Task<OrderViewModel> GetOrderByIdAsync(int orderId)
+        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice)
+        {
+            await repository.AddAsync<Order>(new Order()
+            {
+                BuyerId = clientId,
+                TimeOfOrder = dateTime,
+                TotalPrice = totalPrice
+            });
+            return await repository.SaveChangesAsync();
+        }
+
+        public async Task<Order?> GetOrderByIdAsync(int orderId)
         {
             var order = await repository.GetByIdAsync<Order>(orderId);
             if (order == null)
             {
                 throw new ArgumentException("No such order exists", "getorderbyid");
             }
-            var orderVM = new OrderViewModel()
-            {
-                Id = order.Id,
-                TimeOfOrder = order.TimeOfOrder,
-                TotalPrice = order.TotalPrice,
-                Books = order.Books.Select(b => new BookInOrderViewModel()
-                {
-                    Author = b.AuthorName,
-                    Price = b.Price,
-                    Title = b.Title,
-                }).ToList()
-            };
-            return orderVM;
+            return order;
 
         }
     }

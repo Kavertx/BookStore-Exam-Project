@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240328125638_CreateDataModelsAndSeedDatabase")]
-    partial class CreateDataModelsAndSeedDatabase
+    [Migration("20240410183027_CreationOfDbAndSeed")]
+    partial class CreationOfDbAndSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -899,6 +899,9 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<DateTime>("TimeOfOrder")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuyerId");
@@ -1111,11 +1114,11 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
                     b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
-                        .WithMany("Books")
+                        .WithMany("FavouriteBooks")
                         .HasForeignKey("ClientId");
 
                     b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
-                        .WithMany("FavouriteBooks")
+                        .WithMany("MyBooks")
                         .HasForeignKey("ClientId1");
 
                     b.HasOne("BookStore.Infrastructure.Data.Models.Genre", "Genre")
@@ -1206,9 +1209,9 @@ namespace BookStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
                 {
-                    b.Navigation("Books");
-
                     b.Navigation("FavouriteBooks");
+
+                    b.Navigation("MyBooks");
 
                     b.Navigation("Orders");
                 });

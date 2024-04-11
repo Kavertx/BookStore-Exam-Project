@@ -13,7 +13,7 @@ namespace BookStore.Infrastructure.Data.Models
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
         public ICollection<Order> Orders { get; set; } = new List<Order>();
-        public ICollection<Book> Books { get; set; } = new List<Book>();
+        public ICollection<Book> MyBooks { get; set; } = new List<Book>();
         public ICollection<Book> FavouriteBooks { get; set; } =new List<Book>();
     }
 }

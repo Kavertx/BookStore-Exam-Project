@@ -15,6 +15,14 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing
+                options.IdleTimeout = TimeSpan.FromDays(2);
+                // XSS security
+                options.Cookie.HttpOnly = true;
+            });
             return services;
         }
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)

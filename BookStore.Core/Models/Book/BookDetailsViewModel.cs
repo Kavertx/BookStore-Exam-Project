@@ -15,7 +15,7 @@ namespace BookStore.Core.Models.Book
         public string Description { get; set; } = string.Empty;
         public string Author { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
-        public decimal Rating { get; set; }
+        public int Rating { get; set; }
         public string GenreName { get; set; } = string.Empty;
         public bool InStock { get; set; }
         public decimal Price { get; set; }
