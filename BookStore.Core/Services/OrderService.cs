@@ -35,11 +35,10 @@ namespace BookStore.Core.Services
                 .ToListAsync();   
         }
 
-        public async Task<int> CreateAsync(List<Book> books, int clientId, DateTime dateTime, decimal totalPrice)
+        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice)
         {
             await repository.AddAsync<Order>(new Order()
             {
-                Books = books.AsQueryable().AsNoTracking().ToList(),
                 BuyerId = clientId,
                 TimeOfOrder = dateTime,
                 TotalPrice = totalPrice
@@ -47,26 +46,14 @@ namespace BookStore.Core.Services
             return await repository.SaveChangesAsync();
         }
 
-        public async Task<OrderViewModel> GetOrderByIdAsync(int orderId)
+        public async Task<Order?> GetOrderByIdAsync(int orderId)
         {
             var order = await repository.GetByIdAsync<Order>(orderId);
             if (order == null)
             {
                 throw new ArgumentException("No such order exists", "getorderbyid");
             }
-            var orderVM = new OrderViewModel()
-            {
-                Id = order.Id,
-                TimeOfOrder = order.TimeOfOrder,
-                TotalPrice = order.TotalPrice,
-                Books = order.Books.Select(b => new BookInOrderViewModel()
-                {
-                    Author = b.AuthorName,
-                    Price = b.Price,
-                    Title = b.Title,
-                }).ToList()
-            };
-            return orderVM;
+            return order;
 
         }
     }

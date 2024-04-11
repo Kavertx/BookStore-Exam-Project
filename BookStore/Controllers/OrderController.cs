@@ -104,6 +104,7 @@ namespace BookStore.Controllers
                 {
                     totalPrice += book.Price;
                     var currentBook = await bookService.BookDetailsByIdAsync(book.Id);
+                    // this is where the problem lies
                     Book bookIn = new Book()
                     {
                         AuthorName = currentBook.Author,
@@ -116,7 +117,16 @@ namespace BookStore.Controllers
                     };
                     books.Add(bookIn);
                 }
-                await orderService.CreateAsync(books, (int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice);
+                var clientId = (int)await clientService.GetClientIdAsync(User.Id());
+                var client = await clientService.GetClientByIdAsync(clientId);
+                int orderId = await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice);
+                var order = await orderService.GetOrderByIdAsync(orderId);
+                if (order != null)
+                {
+                    order.Books = books;
+                    client.Orders.Add(order);
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

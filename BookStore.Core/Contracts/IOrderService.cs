@@ -12,7 +12,7 @@ namespace BookStore.Core.Contracts
     public interface IOrderService
     {
         Task<ICollection<OrderItemModel>> AllClientOrdersAsync(string userId);
-        Task<OrderViewModel> GetOrderByIdAsync(int orderId);
-        Task<int> CreateAsync(List<Book> books, int clientId, DateTime dateTime, decimal totalPrice);
+        Task<Order?> GetOrderByIdAsync(int orderId);
+        Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice);
     }
 }
