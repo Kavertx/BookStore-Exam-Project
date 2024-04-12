@@ -25,6 +25,11 @@
                     <td>@order.TotalPrice</td>
                     <td>@order.NumberOfBooks</td>
                 </tr>
+                <a asp-controller="Order" asp-action="Details" asp-route-id="@order.Id">
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Details</button>
+                    </div>
+                </a>
             }
         </tbody>
     </table>

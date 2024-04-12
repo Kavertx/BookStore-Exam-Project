@@ -177,5 +177,10 @@ namespace BookStore.Core.Services
 			var genre = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genreName);
 			return genre?.Id;
         }
+
+        public async Task<IEnumerable<Book>> AllBookBooks()
+        {
+            return await repository.AllReadOnly<Book>().ToListAsync();
+        }
     }
 }

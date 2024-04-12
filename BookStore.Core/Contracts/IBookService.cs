@@ -1,5 +1,6 @@
 ﻿using BookStore.Core.Enums;
 using BookStore.Core.Models.Book;
+using BookStore.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BookStore.Core.Contracts
 {
     public interface IBookService
     {
-
+		Task<IEnumerable<Book>> AllBookBooks();
 		Task<IEnumerable<BookGenreServiceModel>> AllGenresAsync();
 
 		Task<bool> GenreExistsAsync(int genreId);
