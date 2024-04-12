@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using static BookStore.Infrastructure.Constants.DataConstants;
 
 namespace BookStore.Areas.Identity.Pages.Account
 {
@@ -76,6 +77,10 @@ namespace BookStore.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            [StringLength(AppUserConstants.UsernameMax, MinimumLength = AppUserConstants.UsernameMin)]
+            public string Username { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -119,9 +124,8 @@ namespace BookStore.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -130,6 +134,7 @@ namespace BookStore.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    var username = await _userManager.GetUserNameAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -139,7 +144,8 @@ namespace BookStore.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
                     Client client = new Client()
                     {
-                        UserId = userId
+                        UserId = userId,
+                        UserName = username,
                     };
                     await repository.AddAsync<Client>(client);
                     await repository.SaveChangesAsync();
