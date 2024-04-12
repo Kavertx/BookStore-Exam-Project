@@ -15,12 +15,14 @@ namespace BookStore.Infrastructure.Data
 		{
             builder.ApplyConfiguration(new GenreConfig());
             builder.ApplyConfiguration(new BookConfig());
+            builder.ApplyConfiguration(new UserConfig());
 			base.OnModelCreating(builder);
 		}
 		public DbSet<Book> Books { get; set; } = null!;
         public DbSet<Client> Clients { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
+        public DbSet<Review> Reviews { get; set; } = null!;
 
     }
 }

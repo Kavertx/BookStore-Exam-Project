@@ -4,6 +4,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412103239_UpdatedUserConfig")]
+    partial class UpdatedUserConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -898,9 +900,6 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBooks")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("TimeOfOrder")
                         .HasColumnType("datetime2");
 
@@ -1062,15 +1061,15 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88995dfd-de1c-45cf-8341-608683ea57fa",
+                            ConcurrencyStamp = "3dd94c29-06b5-4a54-bf5a-dd080d77c1a7",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMINISTRATORA",
-                            PasswordHash = "AQAAAAEAACcQAAAAELPEL89gm+Lfga65qd1aMY1vhEYNvuTB1kT8uGyoTZXw+FKocYbRmb8ms7h6pP1xAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOjDRaHmrxuz1cZLAl8Q5IqOJvBzzdcBFEV+H1HGgzX71McTKZyjxZxVPv3Oohaaaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8d2418f-02fa-4ef6-8cd5-765ce230f8e0",
+                            SecurityStamp = "82148e35-5e5b-4939-ab3c-b8a0660a5d1e",
                             TwoFactorEnabled = false,
                             UserName = "AdministratorA"
                         });
