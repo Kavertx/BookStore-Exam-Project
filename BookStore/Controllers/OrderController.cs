@@ -5,6 +5,7 @@ using BookStore.Core.Models.Order;
 using BookStore.Extensions;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers
 {
@@ -119,9 +120,9 @@ namespace BookStore.Controllers
                 {
                     totalPrice += book.Price;
                     var currentBook = await bookService.BookDetailsByIdAsync(book.Id);
-                    // this is where the problem lies
                     Book bookIn = new Book()
                     {
+                        Id = book.Id,
                         AuthorName = currentBook.Author,
                         Description = currentBook.Description,
                         GenreId = (int)await bookService.GetGenreIdByNameAsync(currentBook.GenreName),
@@ -139,10 +140,10 @@ namespace BookStore.Controllers
                 if (order != null)
                 {
                     order.Books = books;
-                    client.Orders.Add(order);
+                    client?.Orders.Add(order);
                 }
-                
-                return RedirectToAction(nameof(Index));
+                HttpContext.Session.Remove("Cart");
+                return RedirectToAction(nameof(Index), "Order");
             }
             catch (Exception ex)
             {

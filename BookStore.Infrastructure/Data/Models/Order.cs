@@ -5,6 +5,7 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Order
     {
+        //maybe having GUID as Id would make more sense here
         [Key]
         public int Id { get; set; }
         [Required]

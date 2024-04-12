@@ -35,9 +35,7 @@ namespace BookStore.Core.Services
             {
                 BuyerId = clientId,
                 TimeOfOrder = dateTime,
-                TotalPrice = totalPrice,
-                NumberOfBooks = numberOfBooks
-                
+                TotalPrice = totalPrice
             });
             return await repository.SaveChangesAsync();
         }
