@@ -5,7 +5,6 @@ using BookStore.Core.Models.Order;
 using BookStore.Extensions;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers
 {
@@ -29,8 +28,6 @@ namespace BookStore.Controllers
             var model = clientOrders.Select(o => new OrderViewModel()
             {
                 Id = o.Id,
-                TimeOfOrder = o.TimeOfOrder,
-                TotalPrice = o.TotalPrice,
                 Books = o.Books.Select(b => new BookInOrderViewModel()
                 {
                     Author = b.AuthorName,
@@ -39,7 +36,9 @@ namespace BookStore.Controllers
                     Price = b.Price,
                     Title = b.Title,
                 }).ToList(),
-                BooksOrdered = o.NumberOfBooks
+                TimeOfOrder = o.TimeOfOrder,
+                TotalPrice = o.TotalPrice,
+                NumberOfBooks = o.NumberOfBooks
             });
             return View(model);
         }
@@ -57,7 +56,7 @@ namespace BookStore.Controllers
                 var book = await bookService.BookDetailsByIdAsync(bookId); 
 
                 var cart = HttpContext.Session.Get<List<BookInOrderViewModel>>("Cart") ?? new List<BookInOrderViewModel>();
-                BookInOrderViewModel bookToAdd = new BookInOrderViewModel
+                BookInOrderViewModel bookToAdd = new BookInOrderViewModel()
                 {
                     Id = bookId,
                     Author = book.Author,
@@ -65,7 +64,6 @@ namespace BookStore.Controllers
                     Price = book.Price,
                     Title = book.Title,
                 };
-
                 cart.Add(bookToAdd);
                 HttpContext.Session.Set("Cart", cart);
 
@@ -121,9 +119,9 @@ namespace BookStore.Controllers
                 {
                     totalPrice += book.Price;
                     var currentBook = await bookService.BookDetailsByIdAsync(book.Id);
+                    // this is where the problem lies
                     Book bookIn = new Book()
                     {
-                        Id = book.Id,
                         AuthorName = currentBook.Author,
                         Description = currentBook.Description,
                         GenreId = (int)await bookService.GetGenreIdByNameAsync(currentBook.GenreName),
@@ -141,10 +139,10 @@ namespace BookStore.Controllers
                 if (order != null)
                 {
                     order.Books = books;
-                    client?.Orders.Add(order);
+                    client.Orders.Add(order);
                 }
-                HttpContext.Session.Remove("Cart");
-                return RedirectToAction(nameof(Index), "Order");
+                
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {

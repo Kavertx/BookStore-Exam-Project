@@ -25,7 +25,8 @@ namespace BookStore.Core.Services
         public async Task<ICollection<Order>> AllClientOrdersAsync(string userId)
         {
             var clientId = await clientService.GetClientIdAsync(userId);
-            return await repository.AllReadOnly<Order>().Where(o => o.BuyerId == clientId).ToListAsync();
+            return await repository.AllReadOnly<Order>().Where(o=>o.BuyerId ==clientId)
+                .ToListAsync();   
         }
 
         public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks)
@@ -36,6 +37,7 @@ namespace BookStore.Core.Services
                 TimeOfOrder = dateTime,
                 TotalPrice = totalPrice,
                 NumberOfBooks = numberOfBooks
+                
             });
             return await repository.SaveChangesAsync();
         }

@@ -20,14 +20,14 @@
             public const int NameMax = 50;
             public const int NameMin = 5;
         }
-        public static class OrderConstants 
+        public static class ReviewConstants 
         {
 
         }
-        public static class CategoryConstants
+        public static class AppUserConstants
         {
-            public const int NameMax = 50;
-            public const int NameMin = 5;
+            public const int UsernameMax = 30;
+            public const int UsernameMin = 3;
         }
     }
 }

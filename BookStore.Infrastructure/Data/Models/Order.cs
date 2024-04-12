@@ -5,7 +5,6 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Order
     {
-        //maybe having GUID as Id would make more sense here
         [Key]
         public int Id { get; set; }
         [Required]
@@ -13,11 +12,11 @@ namespace BookStore.Infrastructure.Data.Models
         [ForeignKey(nameof(BuyerId))]
         public Client Buyer { get; set; } = null!;
         [Required]
-        public DateTime TimeOfOrder {  get; set; } = DateTime.Now;
+        public DateTime TimeOfOrder { get; set; } = DateTime.Now;
         public ICollection<Book> Books { get; set; } = new List<Book>();
-		[Required]
-		[Column(TypeName = "decimal(18,2)")]
-		public decimal TotalPrice { get; set; }
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal TotalPrice { get; set; }
         [Required]
         public int NumberOfBooks { get; set; }
     }

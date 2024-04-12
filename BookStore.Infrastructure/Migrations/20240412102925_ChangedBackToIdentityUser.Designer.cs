@@ -4,6 +4,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412102925_ChangedBackToIdentityUser")]
+    partial class ChangedBackToIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -898,9 +900,6 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBooks")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("TimeOfOrder")
                         .HasColumnType("datetime2");
 
@@ -1062,17 +1061,17 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88995dfd-de1c-45cf-8341-608683ea57fa",
+                            ConcurrencyStamp = "2c394f8b-41d2-4cc5-aed5-78b09637472f",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMINISTRATORA",
-                            PasswordHash = "AQAAAAEAACcQAAAAELPEL89gm+Lfga65qd1aMY1vhEYNvuTB1kT8uGyoTZXw+FKocYbRmb8ms7h6pP1xAA==",
+                            NormalizedUserName = "ADMIN@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENEbLSQKkcML0OxZIbcS0xjBRqOdBy8OVNwSAtLUBSNG7rXUmiimE61C6PAEvPYftA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8d2418f-02fa-4ef6-8cd5-765ce230f8e0",
+                            SecurityStamp = "2db96655-0b3b-45d1-9dd5-27a42471cf7e",
                             TwoFactorEnabled = false,
-                            UserName = "AdministratorA"
+                            UserName = "admin@mail.com"
                         });
                 });
 

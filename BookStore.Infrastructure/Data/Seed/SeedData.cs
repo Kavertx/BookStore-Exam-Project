@@ -1,4 +1,5 @@
 ﻿using BookStore.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace BookStore.Infrastructure.Data.Seed
 {
 	internal class SeedData
 	{
-		public Genre Fiction { get; set; }
+		public IdentityUser Admin {  get; set; }
+
+        public Genre Fiction { get; set; }
 		public Genre Mystery { get; set; }
 		public Genre Narrative { get; set; }
 		public Genre Novel { get; set; }
@@ -96,6 +99,7 @@ namespace BookStore.Infrastructure.Data.Seed
 		{
 			SeedGenres();
 			SeedBooks();
+			SeedUsers();
 		}
 
 		private void SeedGenres()
@@ -265,6 +269,22 @@ namespace BookStore.Infrastructure.Data.Seed
 
 
 		}
+
+		private void SeedUsers()
+		{
+            var hasher = new PasswordHasher<IdentityUser>();
+
+            Admin = new IdentityUser()
+            {
+                Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
+                UserName = "AdministratorA",
+                NormalizedUserName = "ADMINISTRATORA",
+                Email = "admin@mail.com",
+                NormalizedEmail = "ADMIN@MAIL.COM"
+            };
+
+            Admin.PasswordHash =hasher.HashPassword(Admin, "admin123");
+        }
 
 		private void SeedBooks()
 		{

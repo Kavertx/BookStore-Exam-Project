@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<OrderViewModel>
+
 @{
     ViewBag.Title = "My Orders";
 }
-
 <h2>@ViewBag.Title</h2>
 @if (Model != null && Model.Count() > 0)
 {
@@ -10,9 +10,10 @@
         <thead>
             <tr>
                 <th>Order ID</th>
+                <th>Time Of Order</th>
                 <th>Total Price</th>
-                <th>Number of books ordered</th>
-                <th>Time of order</th>
+                <th>Number of Books</th>
+                <!-- Add more columns as needed -->
             </tr>
         </thead>
         <tbody>
@@ -20,9 +21,9 @@
             {
                 <tr>
                     <td>@order.Id</td>
+                    <td>@order.TimeOfOrder</td>
                     <td>@order.TotalPrice</td>
-                    <td>@order.BooksOrdered</td>
-                    <td>@order.TimeOfOrder.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@order.NumberOfBooks</td>
                 </tr>
             }
         </tbody>
@@ -30,5 +31,5 @@
 }
 else
 {
-    <p>Your cart is empty.</p>
+    <p>You have no orders.</p>
 }

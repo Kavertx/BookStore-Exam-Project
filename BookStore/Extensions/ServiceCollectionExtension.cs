@@ -3,6 +3,7 @@ using BookStore.Core.Services;
 using BookStore.Infrastructure.Data;
 using BookStore.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -46,6 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.User.RequireUniqueEmail = true;
             }
             )
+                //need to watch areas/roles workshop
+                //.AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             return services;
         }
