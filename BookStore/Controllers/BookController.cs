@@ -31,6 +31,12 @@ namespace BookStore.Controllers
                 );
             query.TotalBooksCount = model.TotalBooksCount;
             query.Books = model.Books;
+            int clientId = (int)await clientService.GetClientIdAsync(User.Id());
+            Client client = await clientService.GetClientByIdAsync(clientId);
+            foreach(var book in client.MyBooks)
+            {
+                Console.WriteLine(book.Title);
+            }
             return View(query);
         }
 
@@ -51,7 +57,8 @@ namespace BookStore.Controllers
         {
             var model = new AllBooksQueryModel();
             int clientId = (int)await clientService.GetClientIdAsync(User.Id());
-            IEnumerable<Infrastructure.Data.Models.Book> clientBooks = await clientService.GetClientAddedBooksAsync(clientId);
+            var client = await clientService.GetClientByIdAsync(clientId);
+            IEnumerable<Book> clientBooks = await clientService.GetClientAddedBooksAsync(clientId);
             model.Books = clientBooks.Select(b => new BookCardViewModel()
             {
                 Author = b.AuthorName,
@@ -86,10 +93,12 @@ namespace BookStore.Controllers
             }
             Client client;
             int clientId = await clientService.GetClientIdAsync(User.Id()) ?? throw new NullReferenceException("Client does not exist");
-            await bookService.CreateAsync(model);
+            int bookId = await bookService.CreateAsync(model);
             client = await clientService.GetClientByIdAsync(clientId) ?? throw new NullReferenceException("Client does not exist");
+            // this doesn't add to mybooks and I don't understand why.....
             client.MyBooks.Add(new Book()
             {
+                Id = bookId,
                 AuthorName = model.AuthorName,
                 Description = model.Description,
                 GenreId = model.GenreId,

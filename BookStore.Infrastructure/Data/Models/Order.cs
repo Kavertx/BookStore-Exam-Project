@@ -14,11 +14,11 @@ namespace BookStore.Infrastructure.Data.Models
         public Client Buyer { get; set; } = null!;
         [Required]
         public DateTime TimeOfOrder { get; set; } = DateTime.Now;
-        public ICollection<Book> Books { get; set; } = new List<Book>();
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
         [Required]
         public int NumberOfBooks { get; set; }
+        public ICollection<BookOrder> BooksOrders { get; set; } = new List<BookOrder>();
     }
 }

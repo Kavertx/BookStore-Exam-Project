@@ -35,10 +35,7 @@ namespace BookStore.Infrastructure.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClientId1")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -56,9 +53,6 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -74,11 +68,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("ClientId1");
-
                     b.HasIndex("GenreId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Books");
 
@@ -87,6 +77,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 1,
                             AuthorName = "F. Scott Fitzgerald",
+                            ClientId = 0,
                             Description = "A novel by F. Scott Fitzgerald, set in the Jazz Age on Long Island \r\n    and New York City. The story depicts the mysterious millionaire Jay Gatsby and \r\n    his passionate pursuit of the elusive Daisy Buchanan. Through themes of love, \r\n    wealth, and the American Dream, Fitzgerald explores the emptiness and moral decay \r\n    lurking beneath the surface of the Roaring Twenties.",
                             GenreId = 16,
                             ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg/220px-The_Great_Gatsby_Cover_1925_Retouched.jpg",
@@ -99,6 +90,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 2,
                             AuthorName = "George Orwell",
+                            ClientId = 0,
                             Description = "A dystopian novel by George Orwell, set in a totalitarian regime \r\n    where individuality and freedom are suppressed by omnipresent government surveillance. \r\n    The story follows Winston Smith as he rebels against the oppressive Party led by Big Brother, \r\n    questioning reality and seeking personal freedom in a world dominated by propaganda and thought control.",
                             GenreId = 5,
                             ImageUrl = "https://m.media-amazon.com/images/I/61ZewDE3beL._AC_UF894,1000_QL80_.jpg",
@@ -111,6 +103,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 3,
                             AuthorName = "Jane Austen",
+                            ClientId = 0,
                             Description = "A novel by Jane Austen, one of the most beloved works of English literature. \r\n    The story follows the romantic entanglements of the Bennet sisters, particularly the headstrong \r\n    Elizabeth Bennet and the aloof Mr. Darcy. Through wit, satire, and social commentary, Austen \r\n    explores themes of love, class, and the constraints of societal expectations in early 19th-century England.",
                             GenreId = 8,
                             ImageUrl = "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781524861759/pride-and-prejudice-9781524861759_hr.jpg",
@@ -123,6 +116,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 4,
                             AuthorName = "Charlotte Brontë",
+                            ClientId = 0,
                             Description = "A novel by Charlotte Brontë, a classic of English literature. \r\n    The story follows the titular character, an orphaned governess, as she navigates \r\n    the challenges of love, morality, and independence in 19th-century England. Brontë's \r\n    exploration of social class, gender roles, and the pursuit of self-respect continues \r\n    to captivate readers with its timeless themes.",
                             GenreId = 16,
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1692725440i/197321006.jpg",
@@ -135,6 +129,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 5,
                             AuthorName = "Patrick Rothfuss",
+                            ClientId = 0,
                             Description = "A fantasy novel by Patrick Rothfuss, the first book in the \r\n    Kingkiller Chronicle series. The story is framed as a retrospective narrative \r\n    of the legendary hero Kvothe, recounting his early life and adventures. Rothfuss \r\n    weaves a rich tapestry of magic, music, and intrigue, drawing readers into a \r\n    world of wonder and danger.",
                             GenreId = 14,
                             ImageUrl = "https://www.gollancz.co.uk/wp-content/uploads/2018/07/hbg-title-9781473224087-159.jpg",
@@ -147,6 +142,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 6,
                             AuthorName = "Patrick Rothfuss",
+                            ClientId = 0,
                             Description = "The second book in the Kingkiller Chronicle series by Patrick Rothfuss. \r\n    Continuing Kvothe's journey, the story delves deeper into his adventures across the \r\n    magical and treacherous world of Temerant. Rothfuss masterfully blends elements of \r\n    epic fantasy, adventure, and mystery to create a captivating narrative that keeps \r\n    readers eagerly turning pages.",
                             GenreId = 14,
                             ImageUrl = "https://m.media-amazon.com/images/I/81Ctt30rgxS._AC_UF1000,1000_QL80_.jpg",
@@ -159,6 +155,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 7,
                             AuthorName = "Anne Frank",
+                            ClientId = 0,
                             Description = "The diary of Anne Frank, a Jewish teenager who hid from \r\n    the Nazis during World War II. Anne's poignant and insightful entries \r\n    provide a firsthand account of the hardships, fears, and hopes of those \r\n    living in hiding. Her story serves as a powerful reminder of the human \r\n    spirit's resilience and the enduring importance of bearing witness to history.",
                             GenreId = 9,
                             ImageUrl = "https://m.media-amazon.com/images/I/51Eyjz65gyL._AC_UF1000,1000_QL80_.jpg",
@@ -171,6 +168,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 8,
                             AuthorName = "David Grann",
+                            ClientId = 0,
                             Description = "A non-fiction book by David Grann, investigating the murders of \r\n    Osage Indians in Oklahoma during the 1920s. Grann explores the conspiracy and \r\n    corruption surrounding the killings, revealing a chilling tale of greed, racism, \r\n    and injustice. His meticulous research and gripping storytelling shed light on \r\n    a dark chapter of American history.",
                             GenreId = 6,
                             ImageUrl = "https://images.macrumors.com/t/HY9LeIGBDDKDrTF3if3D6Pnrxic=/1200x1200/smart/article-new/2020/05/killersoftheflowermoon.jpg",
@@ -183,6 +181,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 9,
                             AuthorName = "James Clear",
+                            ClientId = 0,
                             Description = "A self-help book by James Clear, offering practical strategies \r\n    for building good habits and breaking bad ones. Clear draws on scientific research \r\n    and real-life examples to provide actionable advice on how to make small changes \r\n    that yield remarkable results. Atomic Habits empowers readers to take control of \r\n    their behavior and create lasting positive change.",
                             GenreId = 6,
                             ImageUrl = "https://m.media-amazon.com/images/I/81YkqyaFVEL._AC_UF1000,1000_QL80_.jpg",
@@ -195,6 +194,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 10,
                             AuthorName = "Frank Herbert",
+                            ClientId = 0,
                             Description = "A science fiction novel by Frank Herbert, set in a distant \r\n    future where noble houses vie for control of the desert planet Arrakis. \r\n    The story follows Paul Atreides as he becomes embroiled in political intrigue, \r\n    religious prophecy, and the struggle for survival in a harsh and unforgiving landscape.",
                             GenreId = 5,
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1555447414i/44767458.jpg",
@@ -207,6 +207,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 11,
                             AuthorName = "Douglas Adams",
+                            ClientId = 0,
                             Description = "A comedic science fiction series by Douglas Adams, following \r\n    the misadventures of Arthur Dent after Earth's destruction to make way for \r\n    a hyperspace bypass. With the help of his alien friend Ford Prefect, Arthur \r\n    embarks on a journey through space filled with absurdity, satire, and philosophical musings.",
                             GenreId = 5,
                             ImageUrl = "https://cdn.waterstones.com/bookjackets/large/9781/5290/9781529034523.jpg",
@@ -219,6 +220,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 12,
                             AuthorName = "Mary Shelley",
+                            ClientId = 0,
                             Description = "A gothic science fiction novel by Mary Shelley, exploring \r\n    themes of creation, ambition, and the consequences of playing god. The story \r\n    follows Victor Frankenstein and his creation, often referred to as Frankenstein's \r\n    monster, as they grapple with their own identities and the moral implications of \r\n    their actions.",
                             GenreId = 5,
                             ImageUrl = "https://m.media-amazon.com/images/I/81z7E0uWdtL._AC_UF1000,1000_QL80_.jpg",
@@ -231,6 +233,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 13,
                             AuthorName = "Stanisław Lem",
+                            ClientId = 0,
                             Description = "A philosophical science fiction novel by Stanisław Lem, \r\n    exploring the nature of consciousness, communication, and the unknown. \r\n    Set on the mysterious planet Solaris, the story follows psychologist Kris \r\n    Kelvin as he grapples with strange phenomena and confronts his own inner demons.",
                             GenreId = 5,
                             ImageUrl = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1498631519l/95558.jpg",
@@ -243,6 +246,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 14,
                             AuthorName = "Dan Brown",
+                            ClientId = 0,
                             Description = "A mystery thriller novel by Dan Brown, following symbologist \r\n    Robert Langdon as he investigates a murder in the Louvre Museum. Langdon \r\n    uncovers a series of cryptic clues leading to a centuries-old secret that \r\n    could shake the foundations of Christianity.",
                             GenreId = 2,
                             ImageUrl = "https://m.media-amazon.com/images/I/815WORuYMML._AC_UF1000,1000_QL80_.jpg",
@@ -255,6 +259,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 15,
                             AuthorName = "Thomas Harris",
+                            ClientId = 0,
                             Description = "A psychological horror novel by Thomas Harris, introducing \r\n    FBI trainee Clarice Starling and incarcerated cannibalistic serial killer Dr. \r\n    Hannibal Lecter. Starling seeks Lecter's insights into the mind of another \r\n    serial killer, Buffalo Bill, leading to a gripping cat-and-mouse game between \r\n    law enforcement and the criminally insane.",
                             GenreId = 11,
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1647930822i/23807.jpg",
@@ -267,6 +272,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 16,
                             AuthorName = "Stephen King",
+                            ClientId = 0,
                             Description = "A horror novel by Stephen King, set in the remote Overlook \r\n    Hotel during the winter season. As the hotel's isolation takes its toll on \r\n    the Torrance family, the young Danny Torrance discovers supernatural abilities \r\n    and the sinister history of the hotel. King's tale of terror explores themes \r\n    of addiction, madness, and the darkness lurking within.",
                             GenreId = 13,
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1353277730i/11588.jpg",
@@ -279,6 +285,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 17,
                             AuthorName = "Stephen King",
+                            ClientId = 0,
                             Description = "A horror novel by Stephen King, spanning multiple timelines \r\n    as a group of friends confronts an ancient evil lurking beneath the town \r\n    of Derry, Maine. King weaves together themes of friendship, trauma, and the \r\n    power of memory in a chilling narrative that explores the resilience of the \r\n    human spirit in the face of unimaginable horror.",
                             GenreId = 13,
                             ImageUrl = "https://i.ebayimg.com/images/g/rgkAAOSw969f~26A/s-l600.jpg",
@@ -291,6 +298,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 18,
                             AuthorName = "H.P. Lovecraft",
+                            ClientId = 0,
                             Description = "A horror short story by H.P. Lovecraft, introducing the \r\n    cosmic entity Cthulhu and the Cthulhu Mythos. The story follows a series of \r\n    interconnected narratives uncovering the existence of ancient beings beyond \r\n    human comprehension, and the cults that worship them.",
                             GenreId = 13,
                             ImageUrl = "https://cdn.kobo.com/book-images/828f93f3-99af-4795-afc8-f3a517a21f7b/1200/1200/False/the-call-of-cthulhu-46.jpg",
@@ -303,6 +311,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 19,
                             AuthorName = "H.P. Lovecraft",
+                            ClientId = 0,
                             Description = "A fictional grimoire by H.P. Lovecraft, often cited in \r\n    Lovecraft's mythos as a tome of forbidden knowledge and occult rituals. \r\n    While the Necronomicon is a creation of Lovecraft's imagination, it has \r\n    since become a cultural icon associated with cosmic horror and eldritch lore.",
                             GenreId = 13,
                             ImageUrl = "https://m.media-amazon.com/images/M/MV5BNTdhNDQ2NWItYThjOC00ODU2LWIzNTMtY2ZhMTMwOWE5NjM2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
@@ -315,6 +324,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 20,
                             AuthorName = "H.P. Lovecraft",
+                            ClientId = 0,
                             Description = "A cosmic horror short story by H.P. Lovecraft, depicting \r\n    the blind and mindless entity Azathoth at the center of the universe, \r\n    surrounded by the Outer Gods and other eldritch entities. Lovecraft's \r\n    portrayal of Azathoth as the ultimate chaos and entropy embodies the \r\n    existential dread inherent in cosmic horror.",
                             GenreId = 13,
                             ImageUrl = "https://cdn.kobo.com/book-images/b332f191-3dab-4016-b050-65ec6edaf8d7/1200/1200/False/azathoth-7.jpg",
@@ -327,6 +337,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 21,
                             AuthorName = "Arnold Schwarzenegger",
+                            ClientId = 0,
                             Description = "An autobiography by Arnold Schwarzenegger, detailing his \r\n    journey from a small town in Austria to becoming a bodybuilding champion, \r\n    Hollywood actor, and eventually Governor of California. Schwarzenegger's \r\n    candid account offers insights into his successes, setbacks, and the \r\n    principles that guided his remarkable career.",
                             GenreId = 23,
                             ImageUrl = "https://m.media-amazon.com/images/I/71rL8t6PgqL._AC_UF1000,1000_QL80_.jpg",
@@ -339,6 +350,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 22,
                             AuthorName = "Michelle Obama",
+                            ClientId = 0,
                             Description = "An autobiographical memoir by Michelle Obama, chronicling \r\n    her life from childhood to her tenure as First Lady of the United States. \r\n    With candor and grace, Obama shares her personal journey, reflecting on \r\n    family, identity, and the power of resilience in the face of adversity.",
                             GenreId = 23,
                             ImageUrl = "https://m.media-amazon.com/images/I/81cJTmFpG-L._AC_UF1000,1000_QL80_.jpg",
@@ -351,6 +363,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 23,
                             AuthorName = "Terry Pratchett and Neil Gaiman",
+                            ClientId = 0,
                             Description = "A fantasy novel by Terry Pratchett and Neil Gaiman, \r\n    blending humor, satire, and supernatural elements. The story follows an \r\n    angel and a demon who team up to prevent the apocalypse, leading to \r\n    hilarious and unexpected consequences. Pratchett and Gaiman's collaboration \r\n    is a delightful romp through the end of the world.",
                             GenreId = 14,
                             ImageUrl = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1615552073l/12067.jpg",
@@ -363,6 +376,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 24,
                             AuthorName = "Marcus Aurelius",
+                            ClientId = 0,
                             Description = "A series of personal writings by the Roman Emperor \r\n    Marcus Aurelius, offering reflections on Stoic philosophy and principles \r\n    for living a virtuous life. Written as a series of notes to himself, \r\n    Meditations provides timeless wisdom on resilience, self-discipline, \r\n    and the pursuit of inner peace.",
                             GenreId = 27,
                             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFNQLrDdV96Lxaj5n51b9ylGOUoTmews-Uo8edDGkkpA&s",
@@ -375,6 +389,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 25,
                             AuthorName = "Laozi",
+                            ClientId = 0,
                             Description = "An ancient Chinese philosophical text attributed to \r\n    the sage Laozi, offering insights into Taoist philosophy and the \r\n    nature of existence. The Tao Te Ching explores concepts such as \r\n    balance, harmony, and the principle of wu wei (effortless action), \r\n    guiding readers on a journey of self-discovery and spiritual growth.",
                             GenreId = 27,
                             ImageUrl = "https://m.media-amazon.com/images/I/61hIkVIW9fL._AC_UF894,1000_QL80_.jpg",
@@ -387,6 +402,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 26,
                             AuthorName = "Aristotle",
+                            ClientId = 0,
                             Description = "A treatise by the ancient Greek philosopher Aristotle, \r\n    exploring the nature of virtue, happiness, and the good life. Drawing \r\n    on practical wisdom and moral philosophy, Aristotle offers a systematic \r\n    examination of ethical principles and their application to human conduct.",
                             GenreId = 27,
                             ImageUrl = "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781625582089/the-nicomachean-ethics-9781625582089_hr.jpg",
@@ -399,6 +415,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 27,
                             AuthorName = "Seneca the Younger",
+                            ClientId = 0,
                             Description = "A collection of letters by the Roman Stoic philosopher \r\n    Seneca, addressing topics such as virtue, wisdom, and the art of living \r\n    a meaningful life. Seneca's epistles offer timeless advice and insights \r\n    into Stoic principles, providing readers with practical wisdom for navigating \r\n    the challenges of existence.",
                             GenreId = 27,
                             ImageUrl = "https://m.media-amazon.com/images/I/71CH1raWZ8L._AC_UF1000,1000_QL80_.jpg",
@@ -411,6 +428,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 28,
                             AuthorName = "René Descartes",
+                            ClientId = 0,
                             Description = "A philosophical work by René Descartes, laying the \r\n    groundwork for modern Western philosophy. In Meditations, Descartes \r\n    employs methodical doubt to arrive at foundational truths, famously \r\n    asserting \"Cogito, ergo sum\" (\"I think, therefore I am\"). His \r\n    exploration of skepticism, knowledge, and the existence of God \r\n    continues to influence philosophical discourse to this day.",
                             GenreId = 27,
                             ImageUrl = "https://m.media-amazon.com/images/I/61ZsD7TuuvL._AC_UF1000,1000_QL80_.jpg",
@@ -423,6 +441,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 29,
                             AuthorName = "Friedrich Nietzsche",
+                            ClientId = 0,
                             Description = "A philosophical novel by Friedrich Nietzsche, \r\n    presenting the ideas of the Übermensch (Overman) and the eternal \r\n    recurrence. Through the character of Zarathustra, Nietzsche explores \r\n    themes of individualism, morality, and the search for meaning in \r\n    a world without divine guidance. This seminal work challenges \r\n    traditional values and calls for the reevaluation of human existence.",
                             GenreId = 27,
                             ImageUrl = "https://m.media-amazon.com/images/I/613ZVoVVeXL._AC_UF350,350_QL50_.jpg",
@@ -435,6 +454,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 30,
                             AuthorName = "Immanuel Kant",
+                            ClientId = 0,
                             Description = "A philosophical work by Immanuel Kant, laying the \r\n    groundwork for his transcendental idealism and epistemology. In \r\n    Critique of Pure Reason, Kant explores the nature of human knowledge, \r\n    distinguishing between phenomena (objects as they appear to us) and \r\n    noumena (things as they are in themselves). His critique of reason \r\n    revolutionized modern philosophy and continues to influence \r\n    metaphysical and epistemological debates.",
                             GenreId = 27,
                             ImageUrl = "https://rowman.com/L/08/797/9780879755966.jpg",
@@ -447,6 +467,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 31,
                             AuthorName = "Sun Tzu",
+                            ClientId = 0,
                             Description = "A treatise on military strategy attributed to the \r\n    ancient Chinese military strategist Sun Tzu. The Art of War offers \r\n    timeless insights into tactics, leadership, and the nature of conflict. \r\n    Its teachings on deception, maneuvering, and the importance of knowing \r\n    oneself and one's enemy have found applications beyond the battlefield \r\n    in areas such as business, politics, and personal development.",
                             GenreId = 27,
                             ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkauDL9kU-dnyrZpeWTY8SYegQ6h_4BYKtFtxTGWEs7Q&s",
@@ -459,6 +480,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 32,
                             AuthorName = "William Shakespeare",
+                            ClientId = 0,
                             Description = "A tragedy by William Shakespeare, considered one of \r\n    the greatest works in the English language. The play follows Prince Hamlet \r\n    of Denmark as he grapples with revenge, madness, and existential angst \r\n    after his father's murder. Shakespeare's exploration of moral ambiguity, \r\n    deception, and the human condition continues to captivate audiences \r\n    and scholars alike.",
                             GenreId = 26,
                             ImageUrl = "https://m.media-amazon.com/images/I/51cjtXsg1eL._AC_UF1000,1000_QL80_.jpg",
@@ -471,6 +493,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 33,
                             AuthorName = "Louisa May Alcott",
+                            ClientId = 0,
                             Description = "A novel by Louisa May Alcott, following the lives \r\n    of the March sisters—Meg, Jo, Beth, and Amy—as they come of age during \r\n    the Civil War era. Little Women explores themes of family, sisterhood, \r\n    love, and the pursuit of personal aspirations against societal expectations. \r\n    Alcott's heartfelt storytelling and memorable characters have made \r\n    the novel a timeless classic.",
                             GenreId = 16,
                             ImageUrl = "https://cdn.kobo.com/book-images/f7c39f83-b19a-4566-88cb-c13236e6178e/1200/1200/False/little-women-159.jpg",
@@ -483,6 +506,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 34,
                             AuthorName = "William Shakespeare",
+                            ClientId = 0,
                             Description = "A play by William Shakespeare, often considered \r\n    his final masterpiece. The Tempest tells the story of Prospero, \r\n    a sorcerer and the rightful Duke of Milan, who conjures a storm \r\n    to shipwreck his enemies on a remote island. Themes of power, \r\n    forgiveness, and the complexity of human nature abound in this \r\n    magical and thought-provoking work.",
                             GenreId = 26,
                             ImageUrl = "https://ik.imagekit.io/panmac/tr:di-placeholder_portrait_aMjPtD9YZ.jpg,tr:w-350,f-jpg,pr-true/edition/9781509889761.jpg",
@@ -495,6 +519,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 35,
                             AuthorName = "Mario Puzo",
+                            ClientId = 0,
                             Description = "A crime novel by Mario Puzo, depicting the Corleone \r\n    family's rise to power in the world of organized crime. The Godfather \r\n    explores themes of loyalty, betrayal, and the American Dream, offering \r\n    a gripping portrayal of the Mafia underworld and the complexities \r\n    of family ties. Puzo's iconic novel has left an indelible mark \r\n    on popular culture.",
                             GenreId = 4,
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1394988109i/22034.jpg",
@@ -507,6 +532,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 36,
                             AuthorName = "Emily Dickinson",
+                            ClientId = 0,
                             Description = "Emily Dickinson's 'Poems' is a collection of profound and evocative verses exploring themes of nature, love, and mortality. \r\n	With her unique style and insightful imagery,\r\n	Dickinson invites readers to contemplate the mysteries of life and the human experience.",
                             GenreId = 20,
                             ImageUrl = "https://m.media-amazon.com/images/I/81rFA+FDcVL._AC_UF1000,1000_QL80_.jpg",
@@ -519,6 +545,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 37,
                             AuthorName = "Len Pennie",
+                            ClientId = 0,
                             Description = "A collection of poems by Scottish writer Len Pennie.",
                             GenreId = 20,
                             ImageUrl = "https://m.media-amazon.com/images/I/716tBkcqt8L._AC_UF1000,1000_QL80_.jpg",
@@ -531,6 +558,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 38,
                             AuthorName = "Homer",
+                            ClientId = 0,
                             Description = "An ancient Greek epic poem attributed to Homer, \r\n    chronicling the events of the Trojan War. The Iliad centers on the \r\n    wrath of Achilles and its devastating consequences, exploring themes \r\n    of honor, glory, fate, and the human condition. Regarded as one \r\n    of the greatest works of Western literature, the Iliad continues \r\n    to influence storytelling and cultural imagination.",
                             GenreId = 20,
                             ImageUrl = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1681797700l/77265004.jpg",
@@ -543,6 +571,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 39,
                             AuthorName = "Homer",
+                            ClientId = 0,
                             Description = "An ancient Greek epic poem attributed to Homer, \r\n    depicting the journey of the hero Odysseus as he seeks to return \r\n    home after the fall of Troy. The Odyssey is a timeless tale of \r\n    adventure, perseverance, and the triumph of the human spirit over \r\n    adversity. Homer's epic continues to captivate readers with its \r\n    vivid imagery and profound exploration of the human condition.",
                             GenreId = 20,
                             ImageUrl = "https://images.booksense.com/images/607/473/9798679473607.jpg",
@@ -555,6 +584,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 40,
                             AuthorName = "William L. Shirer",
+                            ClientId = 0,
                             Description = "A historical work by William L. Shirer, chronicling \r\n    the history of Nazi Germany from its inception to its collapse \r\n    at the end of World War II. Drawing on extensive research and \r\n    firsthand accounts, Shirer provides a comprehensive analysis \r\n    of Hitler's regime, its ideology, and the events that led to \r\n    its downfall. The Rise and Fall of the Third Reich remains \r\n    a definitive work on one of the darkest chapters in human history.",
                             GenreId = 15,
                             ImageUrl = "https://covers.storytel.com/jpg-640/9780795317002.7b3303b8-d0b9-4a55-82cf-9330a224e0d1?optimize=high&quality=70",
@@ -567,6 +597,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 41,
                             AuthorName = "A. A. Milne",
+                            ClientId = 0,
                             Description = "A children's book by A.A. Milne, featuring the \r\n    adventures of Winnie the Pooh and his friends in the Hundred \r\n    Acre Wood. Filled with whimsy, humor, and gentle life lessons, \r\n    Winnie the Pooh has captured the hearts of readers of all ages \r\n    for generations. Milne's beloved characters continue to enchant \r\n    and inspire readers around the world.",
                             GenreId = 10,
                             ImageUrl = "https://m.media-amazon.com/images/I/71Joy8rn38L._AC_UF1000,1000_QL80_.jpg",
@@ -579,6 +610,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 42,
                             AuthorName = "J. R. R. Tolkien",
+                            ClientId = 0,
                             Description = "A fantasy novel by J.R.R. Tolkien, following \r\n    the journey of Bilbo Baggins as he embarks on an adventure \r\n    to reclaim the lost kingdom of Erebor from the dragon Smaug. \r\n    Along the way, Bilbo encounters trolls, elves, goblins, and \r\n    the enigmatic creature Gollum, setting the stage for the \r\n    epic events of The Lord of the Rings. Tolkien's enchanting \r\n    tale of courage, friendship, and heroism has captivated \r\n    readers of all ages for decades.",
                             GenreId = 14,
                             ImageUrl = "https://m.media-amazon.com/images/I/71jD4jMityL._AC_UF1000,1000_QL80_.jpg",
@@ -591,6 +623,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 43,
                             AuthorName = "Antoine de Saint-Exupéry",
+                            ClientId = 0,
                             Description = "A novella by Antoine de Saint-Exupéry, \r\n    telling the story of a young prince who travels from \r\n    planet to planet, encountering various characters \r\n    and learning profound lessons about love, friendship, \r\n    and the meaning of life. The Little Prince is a \r\n    timeless fable cherished by readers of all ages for \r\n    its simplicity, wisdom, and poignant insights into \r\n    the human condition.",
                             GenreId = 10,
                             ImageUrl = "https://m.media-amazon.com/images/I/71OZY035QKL._AC_UF1000,1000_QL80_.jpg",
@@ -603,6 +636,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 44,
                             AuthorName = "Stephen Hawking",
+                            ClientId = 0,
                             Description = "A popular science book by Stephen Hawking, \r\n    offering an accessible overview of modern cosmology and \r\n    the nature of the universe. Hawking discusses complex \r\n    topics such as the Big Bang, black holes, and the quest \r\n    for a unified theory of physics in a clear and engaging \r\n    manner, making scientific concepts accessible to \r\n    general readers.",
                             GenreId = 25,
                             ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/400x498/a4e40ebdc3e371adff845072e1c73f37/a/-/40c2f1fdc2ad8ffebaf55f314ce64a5a/a-brief-history-of-time-31.jpg",
@@ -615,6 +649,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 45,
                             AuthorName = "Carl Sagan",
+                            ClientId = 0,
                             Description = "A science book by Carl Sagan, accompanying \r\n    the acclaimed television series of the same name. Cosmos \r\n    explores the universe from the smallest subatomic particles \r\n    to the largest galaxies, weaving together scientific knowledge, \r\n    philosophy, and storytelling to convey the wonder and \r\n    majesty of the cosmos. Sagan's passion for science and \r\n    exploration shines through in every page, inspiring readers \r\n    to contemplate their place in the universe.",
                             GenreId = 25,
                             ImageUrl = "https://m.media-amazon.com/images/I/91Cnrbd3JwL._AC_UF1000,1000_QL80_.jpg",
@@ -627,6 +662,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 46,
                             AuthorName = "Neil deGrasse Tyson",
+                            ClientId = 0,
                             Description = "A popular science book by Neil deGrasse Tyson, \r\n    offering a concise and accessible overview of astrophysics \r\n    for readers with limited time. Tyson covers topics such as \r\n    the origin of the universe, the nature of dark matter and \r\n    dark energy, and the search for extraterrestrial life in \r\n    a manner that is both informative and engaging, making \r\n    complex scientific concepts understandable to the layperson.",
                             GenreId = 25,
                             ImageUrl = "https://m.media-amazon.com/images/I/81G4WoQ9t8L._AC_UF1000,1000_QL80_.jpg",
@@ -639,6 +675,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 47,
                             AuthorName = "Stan Lee and Steve Ditko",
+                            ClientId = 0,
                             Description = "A superhero comic book series featuring the iconic \r\n    character Spider-Man, created by writer Stan Lee and artist Steve Ditko. \r\n    The series follows the adventures of Peter Parker, a high school student \r\n    who gains spider-like abilities after being bitten by a radioactive spider. \r\n    Spider-Man battles villains while navigating the complexities of his dual \r\n    identity as a superhero and a young man dealing with personal struggles \r\n    and responsibilities.",
                             GenreId = 12,
                             ImageUrl = "https://images.penguinrandomhouse.com/cover/9781302931391",
@@ -651,6 +688,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 48,
                             AuthorName = "Alan Moore and David Lloyd",
+                            ClientId = 0,
                             Description = "A dystopian graphic novel by Alan Moore and David Lloyd, \r\n    set in a totalitarian Britain ruled by a fascist regime. The story follows \r\n    V, an anarchist revolutionary wearing a Guy Fawkes mask, as he orchestrates \r\n    a campaign of subversion and rebellion against the oppressive government. \r\n    V for Vendetta explores themes of freedom, identity, and the power of \r\n    resistance in the face of tyranny.",
                             GenreId = 12,
                             ImageUrl = "https://upload.wikimedia.org/wikipedia/en/c/c0/V_for_vendettax.jpg",
@@ -663,6 +701,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 49,
                             AuthorName = "Alan Moore and Brian Bolland",
+                            ClientId = 0,
                             Description = "A graphic novel by Alan Moore and Brian Bolland, \r\n    presenting an origin story for the Joker and exploring the complex \r\n    dynamic between the Joker and Batman. The Killing Joke delves into \r\n    themes of madness, morality, and the blurred line between hero and \r\n    villain in the dark and gritty world of Gotham City.",
                             GenreId = 12,
                             ImageUrl = "https://m.media-amazon.com/images/I/91OjBx3hSNL._AC_UF1000,1000_QL80_.jpg",
@@ -675,6 +714,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 50,
                             AuthorName = "Arthur Conan Doyle",
+                            ClientId = 0,
                             Description = "A mystery novel by Sir Arthur Conan Doyle, featuring \r\n    the detective Sherlock Holmes and his loyal companion Dr. John Watson. \r\n    The Hound of the Baskervilles follows Holmes and Watson as they investigate \r\n    the mysterious death of Sir Charles Baskerville and the legend of a demonic \r\n    hound haunting the Baskerville family. Doyle's masterful storytelling \r\n    and intricate plotting make this one of the most beloved Sherlock Holmes \r\n    mysteries.",
                             GenreId = 2,
                             ImageUrl = "https://cdn.penguin.co.uk/dam-assets/books/9780141329390/9780141329390-jacket-large.jpg",
@@ -687,6 +727,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 51,
                             AuthorName = "Agatha Christie",
+                            ClientId = 0,
                             Description = "A mystery novel by Agatha Christie, featuring her \r\n    famous detective Hercule Poirot. The Murder of Roger Ackroyd is \r\n    known for its twist ending, considered one of the greatest in \r\n    detective fiction. The story follows Poirot as he investigates \r\n    the murder of Roger Ackroyd in a small English village, unraveling \r\n    a web of secrets and deception along the way.",
                             GenreId = 2,
                             ImageUrl = "https://m.media-amazon.com/images/I/51fzBbKwlsL.jpg",
@@ -699,6 +740,7 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = 52,
                             AuthorName = "E. L. James",
+                            ClientId = 0,
                             Description = "An erotic romance novel by E.L. James, the first \r\n    installment in the Fifty Shades trilogy. The story follows the \r\n    relationship between Anastasia Steele, a college graduate, and \r\n    Christian Grey, a wealthy entrepreneur with particular sexual \r\n    tastes. Fifty Shades of Grey explores themes of desire, power, \r\n    and the complexities of intimacy.",
                             GenreId = 8,
                             ImageUrl = "https://m.media-amazon.com/images/I/810BkqRP+iL._AC_UF894,1000_QL80_.jpg",
@@ -707,6 +749,21 @@ namespace BookStore.Infrastructure.Migrations
                             Rating = 3,
                             Title = "Fifty Shades of Grey"
                         });
+                });
+
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.BookOrder", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BooksOrders");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
@@ -1062,15 +1119,15 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88995dfd-de1c-45cf-8341-608683ea57fa",
+                            ConcurrencyStamp = "f9d7a8ed-2513-414a-9b16-aefd735cc53a",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMINISTRATORA",
-                            PasswordHash = "AQAAAAEAACcQAAAAELPEL89gm+Lfga65qd1aMY1vhEYNvuTB1kT8uGyoTZXw+FKocYbRmb8ms7h6pP1xAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMI3mkiGRJ6HTam5rO/X7AwJ5P4WC7lL4kIgxft8q4BHi/7Ax+0zEe7D5FvI8Z6OoQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8d2418f-02fa-4ef6-8cd5-765ce230f8e0",
+                            SecurityStamp = "50b1f5e6-f749-4472-bfda-67c3f7fffa83",
                             TwoFactorEnabled = false,
                             UserName = "AdministratorA"
                         });
@@ -1163,13 +1220,11 @@ namespace BookStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
-                    b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
-                        .WithMany("FavouriteBooks")
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("BookStore.Infrastructure.Data.Models.Client", null)
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Client", "Client")
                         .WithMany("MyBooks")
-                        .HasForeignKey("ClientId1");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BookStore.Infrastructure.Data.Models.Genre", "Genre")
                         .WithMany()
@@ -1177,11 +1232,28 @@ namespace BookStore.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookStore.Infrastructure.Data.Models.Order", null)
-                        .WithMany("Books")
-                        .HasForeignKey("OrderId");
+                    b.Navigation("Client");
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.BookOrder", b =>
+                {
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Book", "Book")
+                        .WithMany("BooksOrders")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookStore.Infrastructure.Data.Models.Order", "Order")
+                        .WithMany("BooksOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
@@ -1276,10 +1348,13 @@ namespace BookStore.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
+                {
+                    b.Navigation("BooksOrders");
+                });
+
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
                 {
-                    b.Navigation("FavouriteBooks");
-
                     b.Navigation("MyBooks");
 
                     b.Navigation("Orders");
@@ -1287,7 +1362,7 @@ namespace BookStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Order", b =>
                 {
-                    b.Navigation("Books");
+                    b.Navigation("BooksOrders");
                 });
 #pragma warning restore 612, 618
         }

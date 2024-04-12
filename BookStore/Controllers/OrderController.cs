@@ -26,22 +26,8 @@ namespace BookStore.Controllers
         public async Task<IActionResult> Index()
         {
             var clientOrders = await orderService.AllClientOrdersAsync(User.Id());
-            var model = clientOrders.Select(o => new OrderViewModel()
-            {
-                Id = o.Id,
-                Books = o.Books.Select(b => new BookInOrderViewModel()
-                {
-                    Author = b.AuthorName,
-                    Id = b.Id,
-                    ImageUrl = b.ImageUrl,
-                    Price = b.Price,
-                    Title = b.Title,
-                }).ToList(),
-                TimeOfOrder = o.TimeOfOrder,
-                TotalPrice = o.TotalPrice,
-                NumberOfBooks = o.NumberOfBooks
-            });
-            return View(model);
+            
+            return View();
         }
         [HttpGet]
 
@@ -135,11 +121,10 @@ namespace BookStore.Controllers
                 }
                 var clientId = (int)await clientService.GetClientIdAsync(User.Id());
                 var client = await clientService.GetClientByIdAsync(clientId);
-                int orderId = await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count);
+                int orderId = await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count,books);
                 var order = await orderService.GetOrderByIdAsync(orderId);
                 if (order != null)
                 {
-                    order.Books = books;
                     client?.Orders.Add(order);
                 }
                 HttpContext.Session.Remove("Cart");

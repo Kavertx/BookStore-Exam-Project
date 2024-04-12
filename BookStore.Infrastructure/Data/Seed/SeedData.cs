@@ -11,7 +11,7 @@ namespace BookStore.Infrastructure.Data.Seed
 	internal class SeedData
 	{
 		public IdentityUser Admin {  get; set; }
-
+		public Client Test {  get; set; }
         public Genre Fiction { get; set; }
 		public Genre Mystery { get; set; }
 		public Genre Narrative { get; set; }
@@ -268,6 +268,17 @@ namespace BookStore.Infrastructure.Data.Seed
 
 
 
+		}
+		private void SeedClients()
+		{
+			Test = new Client()
+			{
+				Id = 1,
+				MyBooks = new List<Book>() { },
+				Orders = new List<Order>() { },
+				UserId = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
+				UserName = "AdministratorA",
+			};
 		}
 
 		private void SeedUsers()

@@ -3,6 +3,7 @@ using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Order;
 using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,15 +30,26 @@ namespace BookStore.Core.Services
                 .ToListAsync();   
         }
 
-        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks)
+        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books)
         {
-            await repository.AddAsync<Order>(new Order()
+
+            var order = new Order()
             {
                 BuyerId = clientId,
                 TimeOfOrder = dateTime,
                 TotalPrice = totalPrice,
                 NumberOfBooks = numberOfBooks
-            });
+            };
+            foreach(var book in books)
+            {
+                BookOrder bo = new BookOrder()
+                {
+                    Order = order,
+                    BookId = book.Id
+                };
+                order.BooksOrders.Add(bo);
+            }
+            await repository.AddAsync<Order>(order);
             return await repository.SaveChangesAsync();
         }
 

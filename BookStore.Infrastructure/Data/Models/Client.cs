@@ -6,7 +6,6 @@ namespace BookStore.Infrastructure.Data.Models
 {
     public class Client
     {
-        //should add Username upon registration for reviews later I think
         [Key]
         public int Id { get; set; }
         [Required]
@@ -17,6 +16,5 @@ namespace BookStore.Infrastructure.Data.Models
         public string UserName { get; set; } = string.Empty;
         public ICollection<Order> Orders { get; set; } = new List<Order>();
         public ICollection<Book> MyBooks { get; set; } = new List<Book>();
-        public ICollection<Book> FavouriteBooks { get; set; } =new List<Book>();
     }
 }

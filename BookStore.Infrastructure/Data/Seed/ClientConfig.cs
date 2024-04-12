@@ -1,23 +1,21 @@
-﻿using BookStore.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookStore.Infrastructure.Data.Models;
 
 namespace BookStore.Infrastructure.Data.Seed
 {
-    internal class UserConfig : IEntityTypeConfiguration<IdentityUser>
+    internal class ClientConfig : IEntityTypeConfiguration<IdentityUser>
     {
         public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
             var data = new SeedData();
-
-            builder.HasData(new IdentityUser[] { data.Admin });
-            //builder.HasData(new Client[] { data.Test });
+            builder.HasData(new Client[] { data.Test });
         }
     }
 }

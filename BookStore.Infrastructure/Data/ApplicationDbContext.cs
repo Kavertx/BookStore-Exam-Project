@@ -13,16 +13,18 @@ namespace BookStore.Infrastructure.Data
         }
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+            base.OnModelCreating(builder);
+            builder.Entity<BookOrder>(e=>e.HasKey(k=> new {k.OrderId, k.BookId}));
+            builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new GenreConfig());
             builder.ApplyConfiguration(new BookConfig());
-            builder.ApplyConfiguration(new UserConfig());
-			base.OnModelCreating(builder);
-		}
+        }
 		public DbSet<Book> Books { get; set; } = null!;
         public DbSet<Client> Clients { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<Review> Reviews { get; set; } = null!;
+        public DbSet<BookOrder> BooksOrders { get; set; } = null!;
 
     }
 }

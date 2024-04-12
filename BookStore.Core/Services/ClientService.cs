@@ -26,7 +26,7 @@ namespace BookStore.Core.Services
             ICollection<Book> clientFavouriteBooks = new List<Book>();
             if(client!=null)
             {
-                clientFavouriteBooks = client.FavouriteBooks;
+                //clientFavouriteBooks = client.FavouriteBooks;
             }
             await clientFavouriteBooks.AsQueryable()
                 .ProjectToBookCardViewModel()

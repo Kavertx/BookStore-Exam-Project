@@ -30,5 +30,10 @@ namespace BookStore.Infrastructure.Data.Models
         public string ImageUrl { get; set; } = string.Empty;
         [Range(BookConstants.RatingMin,BookConstants.RatingMax)]
         public int Rating { get; set; }
+        public  ICollection<BookOrder> BooksOrders { get; set; } = new List<BookOrder>();
+        
+        public int ClientId { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        public Client Client { get; set; }
     }
 }
