@@ -29,37 +29,13 @@ namespace BookStore.Controllers
         public async Task<IActionResult> Index()
         {
             var clientOrders = await orderService.AllClientOrdersAsync(User.Id());
-            var order = clientOrders.First();
-            var idk = order.BooksOrders.AsQueryable().Include(o => o.Book)
-                .Include(bo => bo.Order)
-                .Where(o => o.OrderId == order.Id)
-                .Select(b => new BookInOrderViewModel()
-                {
-                    Author = b.Book.AuthorName,
-                    Id = b.Book.Id,
-                    ImageUrl = b.Book.ImageUrl,
-                    Price = b.Book.Price,
-                    Title = b.Book.Title,
-                }).ToList();
             var model = clientOrders.Select(o => new OrderViewModel()
             {
                 Id = o.Id,
                 NumberOfBooks = o.NumberOfBooks,
                 TimeOfOrder = o.TimeOfOrder,
                 TotalPrice = o.TotalPrice,
-                Books = o.BooksOrders
-                    .AsQueryable()
-                    .Include(o => o.Book)
-                    .Include(bo => bo.Order)
-                    .Where(o => o.OrderId == order.Id)
-                    .Select(b => new BookInOrderViewModel()
-                    {
-                        Author = b.Book.AuthorName,
-                        Id = b.Book.Id,
-                        ImageUrl = b.Book.ImageUrl,
-                        Price = b.Book.Price,
-                        Title = b.Book.Title,
-                    }).ToList()
+                
             });
 
             return View(model);
