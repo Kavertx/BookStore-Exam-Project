@@ -13,6 +13,8 @@ namespace BookStore.Core.Contracts
     {
         Task<ICollection<Order>> AllClientOrdersAsync(string userId);
         Task<Order?> GetOrderByIdAsync(int orderId);
-        Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books);
+        Task CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books);
+        Task<IEnumerable<BookInOrderViewModel>> GetBooksFromOrderIdAsync(int orderId);
+        Task<Order> GetLastClientOrderAsync(int clientId);
     }
 }

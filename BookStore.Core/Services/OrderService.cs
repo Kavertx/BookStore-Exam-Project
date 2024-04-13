@@ -30,7 +30,7 @@ namespace BookStore.Core.Services
             return await repository.AllReadOnly<Order>().Where(o => o.BuyerId == clientId).ToListAsync();
         }
 
-        public async Task<int> CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books)
+        public async Task CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books)
         {
 
             var order = new Order()
@@ -50,7 +50,33 @@ namespace BookStore.Core.Services
                 order.BooksOrders.Add(bo);
             }
             await repository.AddAsync<Order>(order);
-            return await repository.SaveChangesAsync();
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<BookInOrderViewModel>> GetBooksFromOrderIdAsync(int orderId)
+        {
+            var bookIds = repository.AllReadOnly<BookOrder>().Where(bo => bo.OrderId == orderId).ToList();
+            List<Book> books = new List<Book>();
+            foreach (var book in bookIds)
+            {
+                Book bookToAdd = await repository.GetByIdAsync<Book>(book.BookId) ?? throw new NullReferenceException("Book with such Id doesn't exist");
+                books.Add(bookToAdd);
+            }
+            var model = books.Select(b => new BookInOrderViewModel()
+            {
+                Author = b.AuthorName,
+                Id = b.Id,
+                ImageUrl = b.ImageUrl,
+                Price = b.Price,
+                Title = b.Title,
+            });
+            return model;
+        }
+
+        public async Task<Order> GetLastClientOrderAsync(int clientId)
+        {
+            var order = await repository.AllReadOnly<Order>().Where(o=> o.BuyerId==clientId).OrderByDescending(o=> o.Id).FirstOrDefaultAsync();
+            return order;
         }
 
         public async Task<Order?> GetOrderByIdAsync(int orderId)
@@ -63,5 +89,7 @@ namespace BookStore.Core.Services
             return order;
 
         }
+
+        
     }
 }

@@ -3,6 +3,7 @@ using BookStore.Core.Extensions;
 using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Order;
 using BookStore.Extensions;
+using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,7 @@ namespace BookStore.Controllers
                     Price = b.Book.Price,
                     Title = b.Book.Title,
                 }).ToList();
-            var model = clientOrders.Select(o=> new OrderViewModel()
+            var model = clientOrders.Select(o => new OrderViewModel()
             {
                 Id = o.Id,
                 NumberOfBooks = o.NumberOfBooks,
@@ -59,14 +60,30 @@ namespace BookStore.Controllers
                         Price = b.Book.Price,
                         Title = b.Book.Title,
                     }).ToList()
-        });
+            });
+
             return View(model);
         }
         [HttpGet]
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            
+            var order = await orderService.GetOrderByIdAsync(id);
+            if(order == null)
+            {
+                return BadRequest();
+            }
+            var booksFromOrder = await orderService.GetBooksFromOrderIdAsync(id);
+            var model = new OrderViewModel()
+            {
+                Id = order.Id,
+                NumberOfBooks = order.NumberOfBooks,
+                TimeOfOrder = order.TimeOfOrder,
+                TotalPrice = order.TotalPrice,
+                Books = booksFromOrder.ToList()
+            };
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> AddToCart([FromHeader]int bookId)
@@ -154,8 +171,8 @@ namespace BookStore.Controllers
                 }
                 var clientId = (int)await clientService.GetClientIdAsync(User.Id());
                 var client = await clientService.GetClientByIdAsync(clientId);
-                int orderId = await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count,books);
-                var order = await orderService.GetOrderByIdAsync(orderId);
+                await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count,books);
+                var order = await orderService.GetLastClientOrderAsync(clientId);
                 if (order != null)
                 {
                     client?.Orders.Add(order);
