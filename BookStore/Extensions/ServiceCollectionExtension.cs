@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IReviewService, ReviewService>();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {

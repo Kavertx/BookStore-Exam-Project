@@ -4,6 +4,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413173956_DbUpdate")]
+    partial class DbUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1122,15 +1124,15 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "980d786b-925b-43d0-aa46-b2d3ca860b6f",
+                            ConcurrencyStamp = "7b57260e-22d6-4262-9320-50508e7762cc",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMINISTRATORA",
-                            PasswordHash = "AQAAAAEAACcQAAAAENNObIbOcpd7gAYpjB/HY4UYmVxP+cuORLf51SadPaCfylHqFwj6wPgJhri7yWiwAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIWduEZjm2AUlszoDQl5nTJOl3D3Ef4bniLj1u8aS33LCg1rshEig9n7/CowJIH1WA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bd48d46-eab9-43ed-9b91-56cfc37d11f7",
+                            SecurityStamp = "32279d48-014f-4c99-8327-6b9f01d4b0b0",
                             TwoFactorEnabled = false,
                             UserName = "AdministratorA"
                         });

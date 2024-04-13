@@ -1,0 +1,21 @@
+﻿@model ReviewFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form action="/Review/Add" method="post">
+            <div class="book-details">
+                <img class="details-image" src="@Model.ImageUrl" alt="Book Cover">
+                <h2>@Model.BookTitle</h2>
+                <p><strong>Author:</strong> @Model.AuthorName</p>
+                <div class="form-group">
+                    <label asp-for="ReviewContent"></label>
+                    <textarea asp-for="ReviewContent" rows="4" class="form-control" placeholder="Leave a review for this book"></textarea>
+                    <span asp-validation-for="ReviewContent" class="small text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">Submit review</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

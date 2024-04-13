@@ -16,5 +16,6 @@ namespace BookStore.Core.Contracts
         Task CreateAsync(int clientId, DateTime dateTime, decimal totalPrice, int numberOfBooks, List<Book> books);
         Task<IEnumerable<BookInOrderViewModel>> GetBooksFromOrderIdAsync(int orderId);
         Task<Order> GetLastClientOrderAsync(int clientId);
+        Task CreateOrderAndAddToClientOrdersAsync(List<BookInOrderViewModel> books);
     }
 }

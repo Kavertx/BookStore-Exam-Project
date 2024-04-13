@@ -22,7 +22,8 @@
         }
         public static class ReviewConstants 
         {
-
+            public const int ReviewContentMin = 100;
+            public const int ReviewContentMax = 2000;
         }
         public static class AppUserConstants
         {

@@ -10,7 +10,7 @@ namespace System.Linq;
 
 public static class IQueryableBookExtension
 {
-	public static IQueryable<BookCardViewModel> ProjectToBookCardViewModel(this IQueryable<BookStore.Infrastructure.Data.Models.Book> books)
+	public static IQueryable<BookCardViewModel> ProjectToBookCardViewModel(this IQueryable<Book> books)
 	{
 		return books
 			.Select(b => new BookCardViewModel()

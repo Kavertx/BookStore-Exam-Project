@@ -77,7 +77,10 @@ namespace BookStore.Controllers
                     Price = book.Price,
                     Title = book.Title,
                 };
-                cart.Add(bookToAdd);
+                if (!cart.Contains(bookToAdd))
+                {
+                    cart.Add(bookToAdd);
+                }
                 HttpContext.Session.Set("Cart", cart);
 
                 return Ok();
@@ -93,18 +96,16 @@ namespace BookStore.Controllers
         {
             try
             {
-
                 var cart = HttpContext.Session.Get<List<BookInOrderViewModel>>("Cart") ?? new List<BookInOrderViewModel>();
                 var bookToRemove = cart.FirstOrDefault(x => x.Id == bookId);
-
- 
                 if (bookToRemove == null) throw new NullReferenceException("Book is not in the cart");
-                cart.Remove(bookToRemove);
 
+                if (cart.Contains(bookToRemove))
+                {
+                    cart.Remove(bookToRemove);
+                }
 
                 HttpContext.Session.Set("Cart", cart);
-
-
                 return Ok();
             }
             catch (Exception ex)
@@ -126,6 +127,7 @@ namespace BookStore.Controllers
             try
             {
                 var cartModel = HttpContext.Session.Get<List<BookInOrderViewModel>>("Cart") ?? throw new NullReferenceException("Invalid request, cart is empty");
+                //maybe this should be a separate method in the orderService
                 decimal totalPrice = default;
                 List<Book> books = new List<Book>();
                 foreach (var book in cartModel)
@@ -147,7 +149,7 @@ namespace BookStore.Controllers
                 }
                 var clientId = (int)await clientService.GetClientIdAsync(User.Id());
                 var client = await clientService.GetClientByIdAsync(clientId);
-                await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count,books);
+                await orderService.CreateAsync((int)await clientService.GetClientIdAsync(User.Id()), DateTime.Now, totalPrice, books.Count, books);
                 var order = await orderService.GetLastClientOrderAsync(clientId);
                 if (order != null)
                 {

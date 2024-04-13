@@ -18,5 +18,13 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Cart">Cart</a>
         </li>
     }
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Index">Book Reviews</a>
+    </li>@if (this.User?.Identity?.IsAuthenticated ?? false)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Mine">My Reviews</a>
+        </li>
+    }
 </ul>
 

@@ -115,7 +115,7 @@ namespace BookStore.Core.Services
 			return genre!=null;
 		}
 
-		public async Task<int> CreateAsync(BookFormModel model)
+		public async Task<int> CreateAsync(BookFormModel model, int clientId)
 		{
             Book book = new Book()
 			{
@@ -127,6 +127,7 @@ namespace BookStore.Core.Services
 				Price = model.Price,
 				Rating = model.Rating,
 				Title = model.Title,
+				ClientId = clientId
 			};
 
             await repository.AddAsync<Book>(book);
@@ -178,7 +179,7 @@ namespace BookStore.Core.Services
 			return genre?.Id;
         }
 
-        public async Task<IEnumerable<Book>> AllBookBooks()
+        public async Task<IEnumerable<Book>> AllBookBooksAsync()
         {
             return await repository.AllReadOnly<Book>().ToListAsync();
         }

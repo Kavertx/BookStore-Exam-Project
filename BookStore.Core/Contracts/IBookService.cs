@@ -11,12 +11,12 @@ namespace BookStore.Core.Contracts
 {
     public interface IBookService
     {
-		Task<IEnumerable<Book>> AllBookBooks();
+		Task<IEnumerable<Book>> AllBookBooksAsync();
 		Task<IEnumerable<BookGenreServiceModel>> AllGenresAsync();
 
 		Task<bool> GenreExistsAsync(int genreId);
 
-		Task<int> CreateAsync(BookFormModel model);
+		Task<int> CreateAsync(BookFormModel model, int clientId);
 
 		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15);
 

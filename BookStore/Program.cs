@@ -10,7 +10,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddApplicationIdentity(builder.Configuration);
 builder.Services.AddControllersWithViews(options =>
 {
-    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+    //options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 builder.Services.AddApplicationServices();
 

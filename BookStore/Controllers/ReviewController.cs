@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Core.Models.Review;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
 {
@@ -18,7 +19,7 @@ namespace BookStore.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Adda()
+        public async Task<IActionResult> Add(ReviewFormModel review)
         {
             return View();
         }

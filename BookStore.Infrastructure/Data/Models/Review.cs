@@ -22,6 +22,7 @@ namespace BookStore.Infrastructure.Data.Models
         public int BookId { get; set; }
         [ForeignKey(nameof(BookId))]
         public Book Book { get; set; } = null!;
-
+        [Required]
+        public DateTime TimeOfReview { get; set; } = DateTime.Now;
     }
 }
