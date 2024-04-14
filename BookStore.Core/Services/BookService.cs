@@ -142,11 +142,6 @@ namespace BookStore.Core.Services
             await repository.SaveChangesAsync();
         }
 
-		//public Task EditAsync(int houseId, BookFormModel model)
-		//{
-		//	throw new NotImplementedException();
-		//}
-
 		public async Task<bool> BookExistsByIdAsync(int id)
 		{
 			return (await repository.GetByIdAsync<Book>(id)) != null;

@@ -21,6 +21,8 @@ namespace BookStore.Core.Services
 
         public async Task<BookQueryServiceModel> AllFavouriteBooksAsync(string userId)
         {
+            //this will not work
+
             var clientId = GetClientIdAsync(userId);
             var client = await repository.GetByIdAsync<Client>(clientId);
             ICollection<Book> clientFavouriteBooks = new List<Book>();

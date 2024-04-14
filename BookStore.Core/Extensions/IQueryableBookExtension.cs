@@ -1,4 +1,5 @@
 ﻿using BookStore.Core.Models.Book;
+using BookStore.Core.Models.Review;
 using BookStore.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -24,4 +25,17 @@ public static class IQueryableBookExtension
 				Price = b.Price,
 			});
 	}
+    public static IQueryable<ReviewCardModel> ProjectToReviewCardViewModel(this IQueryable<Review> reviews)
+    {
+        return reviews
+            .Select(r => new ReviewCardModel()
+            {
+                Id = r.Id,
+                Author = r.Book.AuthorName,
+                ImageUrl = r.Book.ImageUrl,
+                Title = r.Book.Title,
+                ReviewContent = r.ReviewContent,
+				BookId = r.BookId
+            });
+    }
 }

@@ -1,0 +1,10 @@
+﻿@model ReviewCardModel
+
+<a asp-controller="Review" asp-action="Details" asp-route-id="@Model.Id">
+    <img src="@Model.ImageUrl" class="card-img-top" alt="Book Image">
+    <div class="card-body">
+        <h5 class="card-title"><strong>@Model.Title</strong></h5>
+        <p class="card-text"><h6>@Model.Author</h6></p>
+        <p class="card-text"><i>@Model.ReviewContent</i></p>
+    </div>
+</a>
