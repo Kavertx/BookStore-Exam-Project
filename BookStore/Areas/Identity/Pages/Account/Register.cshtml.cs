@@ -80,7 +80,7 @@ namespace BookStore.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Username")]
             [StringLength(AppUserConstants.UsernameMax, MinimumLength = AppUserConstants.UsernameMin)]
-            public string Username { get; set; }
+            public string UserNameCustom { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -125,7 +125,7 @@ namespace BookStore.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -134,7 +134,7 @@ namespace BookStore.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    var username = await _userManager.GetUserNameAsync(user);
+                    var username = Input.UserNameCustom;
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
