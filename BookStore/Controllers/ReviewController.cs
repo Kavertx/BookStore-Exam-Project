@@ -4,6 +4,7 @@ using BookStore.Core.Models.Review;
 using BookStore.Extensions;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookStore.Controllers
 {
@@ -26,9 +27,14 @@ namespace BookStore.Controllers
             query.Reviews = model.Reviews;
             return View(query);
         }
-        public IActionResult Mine()
+
+        public async Task<IActionResult> Mine([FromQuery]AllReviewsQueryModel query)
         {
-            return View();
+            int clientId = await clientService.GetClientIdAsync(User.Id())?? throw new NullReferenceException();
+            var model = await reviewService.AllAsync(query.SearchTerm);
+            query.Reviews = model.Reviews.Where(r => r.ClientId == clientId);
+            query.TotalReviewsCount = model.TotalReviewsCount;
+            return View(query);
         }
         [HttpGet]
         public async Task<IActionResult> Add(int id)
