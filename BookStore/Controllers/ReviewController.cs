@@ -2,6 +2,7 @@
 using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Review;
 using BookStore.Extensions;
+using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -60,7 +61,15 @@ namespace BookStore.Controllers
         }
         public async Task<IActionResult> Details(int id)
         {
-            return View();
+
+            var model = await reviewService.GetReviewDetailsByIdAsync(id)?? throw new NullReferenceException("Review with id does not exist");
+            
+            return View(model);
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+             await reviewService.DeleteAsync(id);
+            return RedirectToAction(nameof(Mine));
         }
     }
 }

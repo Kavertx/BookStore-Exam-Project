@@ -35,7 +35,8 @@ public static class IQueryableBookExtension
                 ImageUrl = r.Book.ImageUrl,
                 Title = r.Book.Title,
                 ReviewContent = r.ReviewContent,
-				BookId = r.BookId
+				BookId = r.BookId,
+				ClientId = r.ClientId,
             });
     }
 }

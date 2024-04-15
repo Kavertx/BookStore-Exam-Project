@@ -288,8 +288,8 @@ namespace BookStore.Infrastructure.Data.Seed
             Admin = new IdentityUser()
             {
                 Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
-                UserName = "AdministratorA",
-                NormalizedUserName = "ADMINISTRATORA",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "ADMIN@MAIL.COM",
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM"
             };

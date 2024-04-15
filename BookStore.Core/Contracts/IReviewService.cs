@@ -15,6 +15,8 @@ namespace BookStore.Core.Contracts
         Task<Review?> GetReviewByIdAsync(int id);
         Task<int> CreateAsync(ReviewFormModel model, int clientId);
         Task<ReviewQueryServiceModel> AllAsync(string? searchTerm = null, int currentPage = 1, int reviewsPerPage = 16);
+        Task<ReviewCardModel?> GetReviewDetailsByIdAsync(int id);
+        Task<bool> DeleteAsync(int id);
 
     }
 }

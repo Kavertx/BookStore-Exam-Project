@@ -76,5 +76,26 @@ namespace BookStore.Core.Services
         {
             return await repository.GetByIdAsync<Review>(id);
         }
+        public async Task<ReviewCardModel?> GetReviewDetailsByIdAsync(int id)
+        {
+            return await repository.AllReadOnly<Review>().Where(r => r.Id == id).ProjectToReviewCardViewModel().FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            try
+            {
+                var review = await repository.GetByIdAsync<Review>(id) ?? throw new NullReferenceException("Review with this id does not exist");
+                await repository.DeleteAsync<Review>(id);
+                await repository.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            
+        }
     }
 }

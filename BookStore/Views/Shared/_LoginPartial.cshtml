@@ -2,14 +2,15 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IClientService clientService
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    var user = await UserManager.GetUserAsync(User);
-    var username = user?.UserName;
+        var clientId = await clientService.GetClientIdAsync(User.Id())?? throw new NullReferenceException("Client with such id does not exist");
+        var client = await clientService.GetClientByIdAsync(clientId) ?? throw new NullReferenceException("Client with such id does not exist");
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @username!</a>
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @client.UserName!</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

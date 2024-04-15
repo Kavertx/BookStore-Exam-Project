@@ -22,5 +22,6 @@ namespace BookStore.Core.Models.Review
         public string ReviewContent { get; set; } = string.Empty;
         [Required]
         public int BookId { get; set; }
+        public int ClientId { get; set; }
     }
 }
