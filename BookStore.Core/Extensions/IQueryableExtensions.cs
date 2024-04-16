@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Linq;
 
-public static class IQueryableBookExtension
+public static class IQueryableExtensions
 {
 	public static IQueryable<BookCardViewModel> ProjectToBookCardViewModel(this IQueryable<Book> books)
 	{

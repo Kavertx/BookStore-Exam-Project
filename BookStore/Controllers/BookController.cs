@@ -19,6 +19,7 @@ namespace BookStore.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Index([FromQuery]AllBooksQueryModel query)
         {
 
@@ -83,6 +84,7 @@ namespace BookStore.Controllers
             return View(model);
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Add(BookFormModel model)
         {
             if(!await bookService.GenreExistsAsync(model.GenreId))

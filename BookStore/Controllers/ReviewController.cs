@@ -3,6 +3,7 @@ using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Review;
 using BookStore.Extensions;
 using BookStore.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -19,6 +20,8 @@ namespace BookStore.Controllers
             clientService = _clientService;
             bookService = _bookService;
         }
+        [AllowAnonymous]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Index([FromQuery] AllReviewsQueryModel query)
         {
             var model = await reviewService.AllAsync(
@@ -27,7 +30,7 @@ namespace BookStore.Controllers
             query.Reviews = model.Reviews;
             return View(query);
         }
-
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Mine([FromQuery]AllReviewsQueryModel query)
         {
             int clientId = await clientService.GetClientIdAsync(User.Id())?? throw new NullReferenceException();
@@ -65,6 +68,7 @@ namespace BookStore.Controllers
             await reviewService.CreateAsync(review, clientId);
             return RedirectToAction(nameof(Mine));
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
 
