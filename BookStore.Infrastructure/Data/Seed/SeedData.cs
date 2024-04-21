@@ -100,6 +100,7 @@ namespace BookStore.Infrastructure.Data.Seed
 			SeedGenres();
 			SeedBooks();
 			SeedUsers();
+			SeedClients();
 		}
 
 		private void SeedGenres()
@@ -273,7 +274,7 @@ namespace BookStore.Infrastructure.Data.Seed
 		{
 			Test = new Client()
 			{
-				Id = 1,
+				Id = 7,
 				MyBooks = new List<Book>() { },
 				Orders = new List<Order>() { },
 				UserId = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
@@ -293,6 +294,7 @@ namespace BookStore.Infrastructure.Data.Seed
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM"
             };
+
 
             Admin.PasswordHash =hasher.HashPassword(Admin, "admin123");
         }

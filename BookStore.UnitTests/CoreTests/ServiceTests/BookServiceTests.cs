@@ -4,14 +4,14 @@ using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Xunit;
+using NUnit.Framework;
 
 namespace BookStore.UnitTests.CoreTests.ServiceTests
 {
     public class BookServiceTests
     {
         // tests don't work :) 
-        [Fact]
+        [Test]
         public async Task AllAsync_NoFilters_ReturnsAllBooksOrderedAlphabetically()
         {
             // Arrange
@@ -31,14 +31,14 @@ namespace BookStore.UnitTests.CoreTests.ServiceTests
             var result = await service.AllAsync();
 
             // Assert
-            Assert.Equal(3, result.TotalBooksCount);
-            Assert.Equal(3, result.Books.Count());
-            Assert.Equal("Book A", result.Books.ToList()[0].Title);
-            Assert.Equal("Book B", result.Books.ToList()[1].Title);
-            Assert.Equal("Book C", result.Books.ToList()[2].Title);
+            Assert.That(3.Equals(result.TotalBooksCount));
+            Assert.That(3.Equals( result.Books.Count()));
+            Assert.That("Book A".Equals(result.Books.ToList()[0].Title));
+            Assert.That("Book B".Equals(result.Books.ToList()[1].Title));
+            Assert.That("Book C".Equals(result.Books.ToList()[2].Title) );
         }
 
-        [Fact]
+        [Test]
         public async Task AllGenresAsync_ReturnsAllGenres()
         {
             // Arrange
@@ -57,13 +57,13 @@ namespace BookStore.UnitTests.CoreTests.ServiceTests
             var result = await service.AllGenresAsync();
 
             // Assert
-            Assert.Equal(3, result.Count());
-            Assert.Contains(result, g => g.Id == 1 && g.Name == "Fantasy");
-            Assert.Contains(result, g => g.Id == 2 && g.Name == "Science Fiction");
-            Assert.Contains(result, g => g.Id == 3 && g.Name == "Mystery");
+            Assert.That(3.Equals(result.Count()));
+            Assert.That(result.Any( g => g.Id == 1 && g.Name == "Fantasy"));
+            Assert.That(result.Any(g => g.Id == 2 && g.Name == "Science Fiction"));
+            Assert.That(result.Any(g => g.Id == 3 && g.Name == "Mystery"));
         }
 
-        [Fact]
+        [Test]
         public async Task AllBookBooksAsync_FilterBySearchTerm_ReturnsBooksContainingSearchTerm()
         {
             // Arrange
@@ -84,38 +84,15 @@ namespace BookStore.UnitTests.CoreTests.ServiceTests
             var result = booksQ.Where(b => b.AuthorName == "J.R.R. Tolkien");
 
             // Assert
-            Assert.Equal(2,result.Count());
+            Assert.That(2.Equals(result.Count()));
             //Assert.Equal(!3,result.Count());
-            Assert.Equal("Harry Potter", result.ToList()[0].Title);
-            Assert.Equal("Lord of the Rings", result.ToList()[1].Title);
-            Assert.Equal("The Hobbit", result.ToList()[2].Title);       
+            Assert.That("Harry Potter".Equals(result.ToList()[0].Title));
+            Assert.That("Lord of the Rings".Equals(result.ToList()[1].Title));
+            Assert.That("The Hobbit".Equals(result.ToList()[2].Title));       
         }
-        //[Fact]
-        //public async Task AllGenresAsync_ReturnsAllGenres()
-        //{
-        //    // Arrange
-        //    var mockRepository = new Mock<IRepository>();
-        //    var genres = new List<Genre>
-        //    {
-        //        new Genre { Id = 1, Name = "Fantasy" },
-        //        new Genre { Id = 2, Name = "Science Fiction" },
-        //        new Genre { Id = 3, Name = "Mystery" }
-        //    };
-        //    mockRepository.Setup(r => r.AllReadOnly<Genre>()).Returns(genres.AsQueryable());
 
-        //    var service = new BookService(mockRepository.Object);
 
-        //    // Act
-        //    var result = await service.AllGenresAsync();
-
-        //    // Assert
-        //    Assert.That(3.Equals(result.Count()));
-        //    Assert.That(result.Any(g => g.Id == 1 && g.Name == "Fantasy"));
-        //    Assert.That(result.Any(g => g.Id == 2 && g.Name == "Science Fiction"));
-        //    Assert.That(result.Any(g => g.Id == 3 && g.Name == "Mystery"));
-        //}
-
-        [Fact]
+        [Test]
         public async Task AllGenresAsync_EmptyRepository_ReturnsEmptyList()
         {
             // Arrange
@@ -128,7 +105,7 @@ namespace BookStore.UnitTests.CoreTests.ServiceTests
             var result = await service.AllGenresAsync();
 
             // Assert
-            Assert.True(!result.Any());
+            Assert.That(!result.Any());
         }
 
     }

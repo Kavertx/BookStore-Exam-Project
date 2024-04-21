@@ -70,7 +70,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasData(
                         new
@@ -763,7 +763,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BooksOrders");
+                    b.ToTable("BooksOrders", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
@@ -786,7 +786,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Genre", b =>
@@ -804,7 +804,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasData(
                         new
@@ -968,7 +968,7 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Review", b =>
@@ -989,16 +989,13 @@ namespace BookStore.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeOfReview")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1122,17 +1119,17 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c84171c-22fe-4310-9caf-f69991817a76",
+                            ConcurrencyStamp = "f9d7a8ed-2513-414a-9b16-aefd735cc53a",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN8ajpuLBkD4I20A+0otg/cg7Oq4Yie0Z5gtOC+2Js9EeA5BqAS6x4za9sh+IHEymg==",
+                            NormalizedUserName = "ADMINISTRATORA",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMI3mkiGRJ6HTam5rO/X7AwJ5P4WC7lL4kIgxft8q4BHi/7Ax+0zEe7D5FvI8Z6OoQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0afad725-dfbd-4cf0-b220-c3f1ab2e00de",
+                            SecurityStamp = "50b1f5e6-f749-4472-bfda-67c3f7fffa83",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
+                            UserName = "AdministratorA"
                         });
                 });
 
@@ -1284,7 +1281,7 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Review", b =>
                 {
                     b.HasOne("BookStore.Infrastructure.Data.Models.Book", "Book")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1354,8 +1351,6 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
                     b.Navigation("BooksOrders");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
