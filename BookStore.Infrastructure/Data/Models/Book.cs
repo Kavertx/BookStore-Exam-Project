@@ -36,6 +36,7 @@ namespace BookStore.Infrastructure.Data.Models
         [ForeignKey(nameof(ClientId))]
         public Client Client { get; set; }
 
+        public bool IsApproved { get; set; } = false;
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

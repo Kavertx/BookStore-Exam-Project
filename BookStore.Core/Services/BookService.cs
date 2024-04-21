@@ -23,7 +23,7 @@ namespace BookStore.Core.Services
 
 		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16)
 		{
-			var booksToShow = repository.AllReadOnly<Book>();
+			var booksToShow = repository.AllReadOnly<Book>().Where(h=>h.IsApproved);
 			
 			if (string.IsNullOrEmpty(genre) == false)
 			{
