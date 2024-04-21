@@ -10,9 +10,9 @@ using BookStore.Infrastructure.Data.Models;
 
 namespace BookStore.Infrastructure.Data.Seed
 {
-    internal class ClientConfig : IEntityTypeConfiguration<Client>
+    internal class ClientConfig : IEntityTypeConfiguration<IdentityUser>
     {
-        public void Configure(EntityTypeBuilder<Client> builder)
+        public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
             var data = new SeedData();
             builder.HasData(new Client[] { data.Test });

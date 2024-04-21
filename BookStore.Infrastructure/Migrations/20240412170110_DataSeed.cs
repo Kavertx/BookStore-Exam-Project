@@ -11,11 +11,8 @@ namespace BookStore.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "e43ce836-997d-4927-ac59-74e8c41bbfd3", 0, "f9d7a8ed-2513-414a-9b16-aefd735cc53a", "admin@mail.com", false, false, null, "ADMIN@MAIL.COM", "ADMIN@MAIL.COM", "AQAAAAEAACcQAAAAEMI3mkiGRJ6HTam5rO/X7AwJ5P4WC7lL4kIgxft8q4BHi/7Ax+0zEe7D5FvI8Z6OoQ==", null, false, "50b1f5e6-f749-4472-bfda-67c3f7fffa83", false, "admin@mail.com" });
-            migrationBuilder.InsertData(
-               table: "Clients",
-               columns: new[] { "Id", "UserId", "UserName"},
-               values: new object[] { 1, "e43ce836-997d-4927-ac59-74e8c41bbfd3", "AdministratorA" });
+                values: new object[] { "e43ce836-997d-4927-ac59-74e8c41bbfd3", 0, "f9d7a8ed-2513-414a-9b16-aefd735cc53a", "admin@mail.com", false, false, null, "ADMIN@MAIL.COM", "ADMINISTRATORA", "AQAAAAEAACcQAAAAEMI3mkiGRJ6HTam5rO/X7AwJ5P4WC7lL4kIgxft8q4BHi/7Ax+0zEe7D5FvI8Z6OoQ==", null, false, "50b1f5e6-f749-4472-bfda-67c3f7fffa83", false, "AdministratorA" });
+
             migrationBuilder.InsertData(
                 table: "Genres",
                 columns: new[] { "Id", "Name" },
@@ -123,10 +120,6 @@ namespace BookStore.Infrastructure.Migrations
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "e43ce836-997d-4927-ac59-74e8c41bbfd3");
-            migrationBuilder.DeleteData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: 7);
 
             migrationBuilder.DeleteData(
                 table: "Books",

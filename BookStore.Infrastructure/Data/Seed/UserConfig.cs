@@ -17,6 +17,7 @@ namespace BookStore.Infrastructure.Data.Seed
             var data = new SeedData();
 
             builder.HasData(new IdentityUser[] { data.Admin });
+            //builder.HasData(new Client[] { data.Test });
         }
     }
 }

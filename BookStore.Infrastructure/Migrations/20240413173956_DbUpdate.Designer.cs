@@ -4,6 +4,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413173956_DbUpdate")]
+    partial class DbUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1122,17 +1124,17 @@ namespace BookStore.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c84171c-22fe-4310-9caf-f69991817a76",
+                            ConcurrencyStamp = "7b57260e-22d6-4262-9320-50508e7762cc",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN8ajpuLBkD4I20A+0otg/cg7Oq4Yie0Z5gtOC+2Js9EeA5BqAS6x4za9sh+IHEymg==",
+                            NormalizedUserName = "ADMINISTRATORA",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIWduEZjm2AUlszoDQl5nTJOl3D3Ef4bniLj1u8aS33LCg1rshEig9n7/CowJIH1WA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0afad725-dfbd-4cf0-b220-c3f1ab2e00de",
+                            SecurityStamp = "32279d48-014f-4c99-8327-6b9f01d4b0b0",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
+                            UserName = "AdministratorA"
                         });
                 });
 
@@ -1284,7 +1286,7 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Review", b =>
                 {
                     b.HasOne("BookStore.Infrastructure.Data.Models.Book", "Book")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1354,8 +1356,6 @@ namespace BookStore.Infrastructure.Migrations
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Book", b =>
                 {
                     b.Navigation("BooksOrders");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BookStore.Infrastructure.Data.Models.Client", b =>
