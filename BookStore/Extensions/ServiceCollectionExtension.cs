@@ -48,8 +48,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.User.RequireUniqueEmail = true;
             }
             )
-                //need to watch areas/roles workshop
-                //.AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             return services;
         }
