@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using static BookStore.Core.Constants.RoleConstants;
+using static BookStore.Core.Constants.AdminConstants;
 
 namespace BookStore.Extensions
 {

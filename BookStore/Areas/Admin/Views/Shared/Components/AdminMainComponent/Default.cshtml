@@ -3,28 +3,15 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Book" asp-action="Index">All Books</a>
     </li>
-    @if (this.User?.Identity?.IsAuthenticated ?? false)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Book" asp-action="Add">Add Book</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Book" asp-action="MyBooks">My Books</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">My Orders</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Cart">Cart</a>
-        </li>
-    }
+
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Review" asp-action="Index">Book Reviews</a>
-    </li>@if (this.User?.Identity?.IsAuthenticated ?? false)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Review" asp-action="Mine">My Reviews</a>
-        </li>
-    }
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="BooksForApproval">Books for approval</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="ReviewsForApproval">Reviews for approval</a>
+    </li>
 </ul>
 

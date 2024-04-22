@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using static BookStore.Core.Constants.RoleConstants;
+using static BookStore.Core.Constants.AdminConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {

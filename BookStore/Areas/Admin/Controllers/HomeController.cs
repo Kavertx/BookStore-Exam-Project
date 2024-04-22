@@ -8,5 +8,13 @@ namespace BookStore.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult BooksForApproval()
+        {
+            return View();
+        }
+        public IActionResult ReviewsForApproval()
+        {
+            return View();
+        }
     }
 }
