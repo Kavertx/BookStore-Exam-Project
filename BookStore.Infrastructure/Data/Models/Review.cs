@@ -25,6 +25,6 @@ namespace BookStore.Infrastructure.Data.Models
         [Required]
         public DateTime TimeOfReview { get; set; } = DateTime.Now;
 
-        public bool isApproved { get; set; } = false;
+        public bool IsApproved { get; set; } = false;
     }
 }
