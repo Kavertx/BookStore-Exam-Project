@@ -37,6 +37,7 @@ public static class IQueryableExtensions
                 ReviewContent = r.ReviewContent,
 				BookId = r.BookId,
 				ClientId = r.ClientId,
+				IsApproved = r.IsApproved,
             });
     }
 }

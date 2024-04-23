@@ -19,5 +19,6 @@ namespace BookStore.Core.Models.Book
         public string GenreName { get; set; } = string.Empty;
         public bool InStock { get; set; }
         public decimal Price { get; set; }
+        public bool IsApproved { get; set; }
     }
 }

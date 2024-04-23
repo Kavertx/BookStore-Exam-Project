@@ -21,9 +21,9 @@ namespace BookStore.Core.Services
             repository = _repository;           
         }
 
-		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16)
+		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16, bool approved=true)
 		{
-			var booksToShow = repository.AllReadOnly<Book>().Where(h=>h.IsApproved);
+			var booksToShow = repository.AllReadOnly<Book>().Where(h=>h.IsApproved == approved);
 			
 			if (string.IsNullOrEmpty(genre) == false)
 			{
@@ -104,7 +104,7 @@ namespace BookStore.Core.Services
 				Price = bookById.Price,
 				Rating = bookById.Rating,
 				Title = bookById.Title,
-				
+				IsApproved = bookById.IsApproved,
 			};
 			
 		}
@@ -177,6 +177,13 @@ namespace BookStore.Core.Services
         public async Task<IEnumerable<Book>> AllBookBooksAsync()
         {
             return await repository.AllReadOnly<Book>().ToListAsync();
+        }
+
+        public async Task ApproveBookAsync(int id)
+        {
+			Book? book = await repository.GetByIdAsync<Book>(id);
+			book.IsApproved = true;
+			await repository.SaveChangesAsync();
         }
     }
 }

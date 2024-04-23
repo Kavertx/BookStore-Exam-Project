@@ -18,7 +18,7 @@ namespace BookStore.Core.Contracts
 
 		Task<int> CreateAsync(BookFormModel model, int clientId);
 
-		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15);
+		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15, bool approved=true);
 
 		Task<IEnumerable<string>> AllGenresNamesAsync();
 		Task<string> GetGenreNameByIdAsync(int genreId);
@@ -28,5 +28,7 @@ namespace BookStore.Core.Contracts
 		Task<IEnumerable<BookCardViewModel>> GetBooksByGenreAsync(int genreId);
 		Task DeleteAsync(int bookId);
 		Task <int?> GetGenreIdByNameAsync(string genreName);
+
+		Task ApproveBookAsync(int id);
 	}
 }

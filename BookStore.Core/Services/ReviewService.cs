@@ -40,9 +40,9 @@ namespace BookStore.Core.Services
             return await repository.AllReadOnly<Review>().Where(r=> r.ClientId == clientId).ToListAsync();
         }
 
-        public async Task<ReviewQueryServiceModel> AllAsync(string? searchTerm = null, int currentPage = 1, int reviewsPerPage = 16)
+        public async Task<ReviewQueryServiceModel> AllAsync(string? searchTerm = null, int currentPage = 1, int reviewsPerPage = 16, bool isApproved = true )
         {
-            var reviewsToShow = repository.AllReadOnly<Review>();
+            var reviewsToShow = repository.AllReadOnly<Review>().Where(r=> r.IsApproved == isApproved);
 
             if (string.IsNullOrEmpty(searchTerm) == false)
             {
@@ -96,6 +96,13 @@ namespace BookStore.Core.Services
             }
 
             
+        }
+
+        public async Task ApproveReviewAsync(int id)
+        {
+            var review = await repository.GetByIdAsync<Review>(id);
+            review.IsApproved = true;
+            await repository.SaveChangesAsync();
         }
     }
 }

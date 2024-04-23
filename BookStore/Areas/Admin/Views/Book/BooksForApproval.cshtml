@@ -1,0 +1,96 @@
+﻿@using BookStore.Core.Enums
+@model AllBooksQueryModel
+@inject IBookService bookService
+@{
+    ViewBag.Title = "Books for approval";
+}
+<form>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 bg-light">
+                <div class="sidebar form-group">
+                    <label asp-for="Sorting"></label>
+                    <select asp-for="Sorting" class="form-control">
+                        @foreach (BookSorting option in Enum.GetValues(typeof(BookSorting)))
+                        {
+                            <div class="sidebar-item">
+                            <option value="@option">@option</option>
+                    </div>
+                        }
+                </select>
+            </div>
+            <div class="sidebar form-group">
+                <label asp-for="GenreName">Genres</label>
+                <select asp-for="GenreName" class="form-control">
+                    <option value=@null>All Genres</option>
+                        @foreach (var genre in await bookService.AllGenresAsync())
+                        {
+                        <div class="sidebar-item">
+                        <option value="@genre.Name">@genre.Name</option>
+                </div>
+                        }
+            </select>
+        </div>
+        <div class="sidebar form-group">
+            <label asp-for="SearchTerm"></label>
+            <input asp-for="SearchTerm" class="form-control me-2" placeholder="Search" aria-label="Search">
+            <input class="btn btn-outline-success" type="submit" value="Search"></input>
+        </div>
+    </div>
+</form>
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalBooksCount /
+        Model.BooksPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Book"
+           asp-action="Index"
+           asp-route-currentPage="@previousPage"
+           asp-route-genreId="@Model.GenreName"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+    </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.Books.Any();
+    }
+
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+           asp-controller="Book"
+           asp-action="Index"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-genreId="@Model.GenreName"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
+</div>
+@if (!Model.Books.Any())
+{
+    <h2 class="text-center">No books found by the given criteria!</h2>
+}
+<!-- Main Content -->
+<div class="col-lg-10">
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                        <partial name="_BookPartial" model="@book" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

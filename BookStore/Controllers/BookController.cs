@@ -28,7 +28,8 @@ namespace BookStore.Controllers
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
-                query.BooksPerPage
+                query.BooksPerPage,
+                true
                 );
             query.TotalBooksCount = model.TotalBooksCount;
             query.Books = model.Books;

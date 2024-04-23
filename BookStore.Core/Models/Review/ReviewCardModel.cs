@@ -23,5 +23,6 @@ namespace BookStore.Core.Models.Review
         [Required]
         public int BookId { get; set; }
         public int ClientId { get; set; }
+        public bool IsApproved { get; set; }
     }
 }

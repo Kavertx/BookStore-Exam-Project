@@ -1,23 +1,49 @@
 ﻿@model BookCardViewModel
 
-
+@if (!this.User.IsAdmin())
+{
+    <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+        <img src="@Model.ImageUrl" class="card-img-top" alt="Book Image">
+    </a>
+    <div class="card-body">
         <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
-        <img src="@Model.ImageUrl" class="card-img-top" alt="Book Image"></a>
-        <div class="card-body">
-            <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
-                <h5 class="card-title">@Model.Title</h5>
-            </a>
-            <p class="card-text">@Model.Author</p>
-            <p class="card-text">$@Model.Price</p>
-            <p class="card-text">Rating: @Model.Rating</p>
-            @if (@Model.InStock)
-            {
-                <p class="card-text">In stock</p>
-            }
-            else
-            {
-                <p class="card-text">Out of stock</p>
-            }
-        </div>
+            <h5 class="card-title">@Model.Title</h5>
+        </a>
+        <p class="card-text">@Model.Author</p>
+        <p class="card-text">$@Model.Price</p>
+        <p class="card-text">Rating: @Model.Rating</p>
+        @if (@Model.InStock)
+        {
+            <p class="card-text">In stock</p>
+        }
+        else
+        {
+            <p class="card-text">Out of stock</p>
+        }
+    </div>
+}
+else
+{
+    <a asp-area="Admin" asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+        <img src="@Model.ImageUrl" class="card-img-top" alt="Book Image">
+    </a>
+    <div class="card-body">
+        <a asp-area="Admin" asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">
+            <h5 class="card-title">@Model.Title</h5>
+        </a>
+        <p class="card-text">@Model.Author</p>
+        <p class="card-text">$@Model.Price</p>
+        <p class="card-text">Rating: @Model.Rating</p>
+        @if (@Model.InStock)
+        {
+            <p class="card-text">In stock</p>
+        }
+        else
+        {
+            <p class="card-text">Out of stock</p>
+        }
+    </div>
+}
+
 
 
