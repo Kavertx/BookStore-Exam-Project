@@ -147,27 +147,6 @@ namespace BookStore.Core.Services
 			return (await repository.GetByIdAsync<Book>(id)) != null;
 		}
 
-		public async Task<IEnumerable<BookCardViewModel>> GetBooksByGenreAsync(int genreId)
-		{
-			return await repository.AllReadOnly<Book>()
-				.Where(b=>b.GenreId == genreId)
-				.Select(b=> new BookCardViewModel()
-				{
-					Author = b.AuthorName,
-					Id = b.Id,
-					ImageUrl = b.ImageUrl,
-					InStock = b.InStock,
-					Rating = b.Rating,
-					Title = b.Title,
-				}).ToListAsync();
-		}
-
-        public async Task<string> GetGenreNameByIdAsync(int genreId)
-        {
-			var genre = await repository.GetByIdAsync<Genre>(genreId) ?? throw new NullReferenceException("Genre with this id does not exist");
-            return genre.Name;
-        }
-
         public async Task<int?> GetGenreIdByNameAsync(string genreName)
         {
 			var genre = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genreName);
