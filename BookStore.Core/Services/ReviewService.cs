@@ -35,11 +35,6 @@ namespace BookStore.Core.Services
             return review.Id;
         }
 
-        public async Task<IEnumerable<Review>> GetAllClientReviewsAsync(int clientId)
-        {
-            return await repository.AllReadOnly<Review>().Where(r=> r.ClientId == clientId).ToListAsync();
-        }
-
         public async Task<ReviewQueryServiceModel> AllAsync(string? searchTerm = null, int currentPage = 1, int reviewsPerPage = 16, bool isApproved = true )
         {
             var reviewsToShow = repository.AllReadOnly<Review>().Where(r=> r.IsApproved == isApproved);
@@ -67,10 +62,7 @@ namespace BookStore.Core.Services
                 TotalReviewsCount = totalReviews
             };
         }
-        public async Task<IEnumerable<ReviewCardModel>> GetAllReviewsAsync()
-        {
-            return await repository.AllReadOnly<Review>().ProjectToReviewCardViewModel().ToListAsync();
-        }
+
 
         public async Task<Review?> GetReviewByIdAsync(int id)
         {

@@ -53,11 +53,6 @@ namespace BookStore.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public Task CreateOrderAndAddToClientOrdersAsync(List<BookInOrderViewModel> books)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<BookInOrderViewModel>> GetBooksFromOrderIdAsync(int orderId)
         {
             var bookIds = repository.AllReadOnly<BookOrder>().Where(bo => bo.OrderId == orderId).ToList();

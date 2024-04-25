@@ -19,31 +19,6 @@ namespace BookStore.Core.Services
             repository = _repository;
         }
 
-        public async Task<BookQueryServiceModel> AllFavouriteBooksAsync(string userId)
-        {
-            //this will not work
-
-            var clientId = GetClientIdAsync(userId);
-            var client = await repository.GetByIdAsync<Client>(clientId);
-            ICollection<Book> clientFavouriteBooks = new List<Book>();
-            if(client!=null)
-            {
-                //clientFavouriteBooks = client.FavouriteBooks;
-            }
-            await clientFavouriteBooks.AsQueryable()
-                .ProjectToBookCardViewModel()
-                .ToListAsync();
-            var result = new BookQueryServiceModel()
-            {
-                TotalBooksCount = clientFavouriteBooks.Count,
-                Books = await clientFavouriteBooks.AsQueryable()
-                .ProjectToBookCardViewModel()
-                .ToListAsync()
-            };
-            return result;
-
-        }
-
         public async Task<int?> GetClientIdAsync(string userId)
         {
             return (await repository.AllReadOnly<Client>()

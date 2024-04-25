@@ -10,8 +10,6 @@ namespace BookStore.Core.Contracts
 {
     public interface IReviewService
     {
-        Task<IEnumerable<ReviewCardModel>> GetAllReviewsAsync();
-        Task<IEnumerable<Review>> GetAllClientReviewsAsync(int clientId);
         Task<Review?> GetReviewByIdAsync(int id);
         Task<int> CreateAsync(ReviewFormModel model, int clientId);
         Task<ReviewQueryServiceModel> AllAsync(string? searchTerm = null, int currentPage = 1, int reviewsPerPage = 16, bool isApproved = true);

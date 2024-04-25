@@ -10,7 +10,6 @@ namespace BookStore.Core.Contracts
 {
     public interface IClientService
     {
-        Task<BookQueryServiceModel> AllFavouriteBooksAsync(string userId);
         Task<int?> GetClientIdAsync(string userId);
         Task<Client?> GetClientByIdAsync(int id);
        
