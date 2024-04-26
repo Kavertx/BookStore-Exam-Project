@@ -1,14 +1,9 @@
 ﻿using BookStore.Core.Contracts;
 using BookStore.Core.Extensions;
-using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Order;
 using BookStore.Extensions;
-using BookStore.Infrastructure.Data.Common;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using static NuGet.Packaging.PackagingConstants;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStore.Controllers
 {

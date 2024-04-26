@@ -4,7 +4,6 @@ using BookStore.Extensions;
 using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers
 {
@@ -51,13 +50,15 @@ namespace BookStore.Controllers
         [HttpGet]
         public async Task<IActionResult> MyBooks()
         {
-            var model = new AllBooksQueryModel();
-            int clientId = (int)await clientService.GetClientIdAsync(User.Id());
-            var client = await clientService.GetClientByIdAsync(clientId);
-            if(client == null)
+            if (User.Id() == null)
             {
                 return BadRequest();
             }
+
+            var model = new AllBooksQueryModel();
+            int clientId = (int)await clientService.GetClientIdAsync(User.Id());
+            var client = await clientService.GetClientByIdAsync(clientId);
+            // there is no way for these to even come up
             if(client.UserId != User.Id())
             {
                 return Unauthorized();

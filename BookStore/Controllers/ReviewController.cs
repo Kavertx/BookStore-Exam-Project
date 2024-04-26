@@ -1,11 +1,8 @@
 ﻿using BookStore.Core.Contracts;
-using BookStore.Core.Models.Book;
 using BookStore.Core.Models.Review;
 using BookStore.Extensions;
-using BookStore.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookStore.Controllers
 {
@@ -63,7 +60,7 @@ namespace BookStore.Controllers
             var client = await clientService.GetClientByIdAsync(clientId) ?? throw new NullReferenceException("Client with id doesn't exist");
             if (client.UserId!= User.Id())
             {
-                return BadRequest();
+                return BadRequest("Review");
             }
             await reviewService.CreateAsync(review, clientId);
             return RedirectToAction(nameof(Mine));

@@ -26,6 +26,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Attributes\" />
     <Folder Include="ModelBinders\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

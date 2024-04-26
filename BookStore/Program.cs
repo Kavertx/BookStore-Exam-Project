@@ -8,10 +8,7 @@ builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddApplicationIdentity(builder.Configuration);
-builder.Services.AddControllersWithViews(options =>
-{
-    //options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-});
+builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
@@ -20,11 +17,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
+    
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Home/Error/500");
+    app.UseStatusCodePagesWithRedirects("/Home/Error?statuscode={0}");
     app.UseHsts();
 }
 
@@ -33,6 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
