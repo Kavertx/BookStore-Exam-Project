@@ -20,18 +20,14 @@ namespace BookStore.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Error(int statusCode)
         {
-            switch (statusCode)
+            return statusCode switch
             {
-                case 400:
-                    return View("Error400");
-                case 401:
-                    return View("Error401");
-                case 404:
-                    return View("Error404");
-                case 500:
-                    return View("Error500");
-            }
-            return View();
+                400 => View("Error400"),
+                401 => View("Error401"),
+                404 => View("Error404"),
+                500 => View("Error500"),
+                _ => View("Error")
+            };
         }
     }
 }
