@@ -1,4 +1,5 @@
 ﻿@model BookCardViewModel
+@Html.AntiForgeryToken()
 
 @if (!this.User.IsAdmin())
 {

@@ -22,7 +22,7 @@
             @foreach (var book in Model)
             {
                 <tr>
-                    <form class="remove-from-cart-form">
+                    <form asp-antiforgery="true" class="remove-from-cart-form">
                     <td><img src="@book.ImageUrl" class="card-img-top small-image" alt="Book Image"></td>
                     <td>@book.Title</td>
                     <td>@book.Author</td>
@@ -37,7 +37,7 @@
             }
         </tbody>
     </table>
-    <form id="order-form" action="/Order/PlaceOrder" method="post">
+    <form asp-antiforgery="true" id="order-form" action="/Order/PlaceOrder" method="post">
 
         <button class="btn btn-primary" type="submit">Purchase</button>
     </form>
@@ -50,6 +50,7 @@ else
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             var removeFromCartForms = document.querySelectorAll('.remove-from-cart-form');
             removeFromCartForms.forEach(function (form) {
                 form.addEventListener('submit', function (event) {
@@ -63,9 +64,12 @@ else
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'bookId' : bookId
+                            'bookId' : bookId,
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify({ data: 'value' })
                         }
-                    })
+                    )
                         .then(response => {
                             if (response.ok) {
                                 // Book removed successfully, optionally update UI
@@ -88,6 +92,7 @@ else
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             var orderForm = document.getElementById('order-form');
             if (orderForm) {
                 orderForm.addEventListener('submit', function (event) {
@@ -97,7 +102,10 @@ else
                     fetch('/Order/CreateOrder', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify({ data: 'value' })
                         },
                         // Empty body as we don't need to send any data
                     })

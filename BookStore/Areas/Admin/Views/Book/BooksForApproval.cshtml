@@ -14,11 +14,10 @@
                     <select asp-for="Sorting" class="form-control">
                         @foreach (BookSorting option in Enum.GetValues(typeof(BookSorting)))
                         {
-                            <div class="sidebar-item">
-                            <option value="@option">@option</option>
-                    </div>
+                                <option value="@option">@option</option>
                         }
-                </select>
+                    </select>
+                </div>
             </div>
             <div class="sidebar form-group">
                 <label asp-for="GenreName">Genres</label>
@@ -26,11 +25,10 @@
                     <option value=@null>All Genres</option>
                         @foreach (var genre in await bookService.AllGenresAsync())
                         {
-                        <div class="sidebar-item">
-                        <option value="@genre.Name">@genre.Name</option>
-                </div>
+                            <option value="@genre.Name">@genre.Name</option>
                         }
-            </select>
+                </select>
+             </div>
         </div>
         <div class="sidebar form-group">
             <label asp-for="SearchTerm"></label>

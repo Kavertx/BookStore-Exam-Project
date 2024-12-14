@@ -3,7 +3,7 @@
     ViewBag.Title = "All Book Reviews";
 }
 
-<form>
+<form asp-antiforgery="true">
     <div class="container-fluid">
         <div class="sidebar form-group">
             <input asp-for="SearchTerm" class="form-control me-2" placeholder="Search" aria-label="Search">
