@@ -5,6 +5,12 @@ namespace BookStore.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -20,16 +26,13 @@ namespace BookStore.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Error(int statusCode)
         {
-            switch (statusCode)
+            if (statusCode==400)
             {
-                case 400:
-                    return View("Error400");
-                case 401:
-                    return View("Error401");
-                case 404:
-                    return View("Error404");
-                case 500:
-                    return View("Error500");
+                return View("Error400");
+            }
+            else if(statusCode ==401 )
+            {
+                return View("Error401");
             }
             return View();
         }
