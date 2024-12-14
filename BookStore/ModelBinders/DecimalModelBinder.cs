@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace BookStore.ModelBinders
 {
-    public class DecimalModelBinder:IModelBinder
+    public class DecimalModelBinder: IModelBinder
     {
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {

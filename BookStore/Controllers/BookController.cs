@@ -48,35 +48,31 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyBooks()
+        public async Task<IActionResult> MyBooks([FromQuery] AllBooksQueryModel query)
         {
             if (User.Id() == null)
             {
                 return BadRequest();
             }
-
-            var model = new AllBooksQueryModel();
             int clientId = (int)await clientService.GetClientIdAsync(User.Id());
             var client = await clientService.GetClientByIdAsync(clientId);
-            // there is no way for these to even come up
+
             if(client.UserId != User.Id())
             {
                 return Unauthorized();
             }
-            IEnumerable<Book> allBooks = await bookService.AllBookBooksAsync();
-            var clientBooks = allBooks.Where(b=> b.ClientId == clientId).ToList();
-            model.Books = clientBooks.Select(b => new BookCardViewModel()
-            {
-                Author = b.AuthorName,
-                Id = b.Id,
-                ImageUrl = b.ImageUrl,
-                InStock = b.InStock,
-                Price = b.Price,
-                Rating = b.Rating,
-                Title = b.Title,
-            }).ToList();
-            model.TotalBooksCount = model.Books.Count();
-            return View(model);
+            var model = await bookService.AllAsync(
+                query.GenreName,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                query.BooksPerPage,
+                true,
+                clientId
+                );
+            query.Books = model.Books;
+            query.TotalBooksCount = model.TotalBooksCount;
+            return View(query);
         }
         [HttpGet]
         public async Task<IActionResult> Add()

@@ -87,7 +87,7 @@ namespace BookStore.Controllers
             }
         }
         [HttpPost]
-        public IActionResult RemoveFromCart([FromHeader]int bookId)
+        public async Task<IActionResult> RemoveFromCart([FromHeader]int bookId)
         {
             try
             {

@@ -18,7 +18,7 @@ namespace BookStore.Core.Contracts
 
 		Task<int> CreateAsync(BookFormModel model, int clientId);
 
-		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15, bool approved=true);
+		Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 15, bool approved=true, int? userId = null);
 
 		Task<IEnumerable<string>> AllGenresNamesAsync();
 

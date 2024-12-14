@@ -21,7 +21,7 @@ namespace BookStore.Core.Services
             repository = _repository;           
         }
 
-		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16, bool approved=true)
+		public async Task<BookQueryServiceModel> AllAsync(string? genre = null, string? searchTerm = null, BookSorting sorting = BookSorting.Alphabetical, int currentPage = 1, int booksPerPage = 16, bool approved=true, int? userId = null)
 		{
 			var booksToShow = repository.AllReadOnly<Book>().Where(h=>h.IsApproved == approved);
 			
@@ -29,6 +29,10 @@ namespace BookStore.Core.Services
 			{
                 var genreOfBook = await repository.AllReadOnly<Genre>().FirstOrDefaultAsync(g => g.Name == genre) ?? throw new NullReferenceException("Genre with this id does not exist"); ;
                 booksToShow = booksToShow.Where(b => b.GenreId == genreOfBook.Id);
+			}
+			if (userId != null)
+			{
+				booksToShow = booksToShow.Where(b => b.ClientId == userId);
 			}
 
 			if (string.IsNullOrEmpty(searchTerm) == false)
