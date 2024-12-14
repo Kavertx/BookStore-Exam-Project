@@ -8,8 +8,8 @@
             public const int TitleMin = 1;
             public const int DescriptionMax = 2000;
             public const int DescriptionMin = 100;
-            public const string PriceMin = "0,99";
-            public const string PriceMax = "1000,00";
+            public const string PriceMin = "1";
+            public const string PriceMax = "1000";
             public const int AuthorNameMax = 150;
             public const int AuthorNameMin = 3;
             public const int RatingMax = 5;
