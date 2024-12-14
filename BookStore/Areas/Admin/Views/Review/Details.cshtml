@@ -11,18 +11,18 @@
         <p> @Model.ReviewContent</p>
     @if (!Model.IsApproved)
     {
-        <form class="approve-review-form">
+        <form asp-antiforgery="true" class="approve-review-form">
             <input type="hidden" name="reviewId" value=@Model.Id>
             <input class="btn btn-primary" type="submit" value="Approve" />
         </form>
-        <form class="delete-review-form">
+        <form asp-antiforgery="true" class="delete-review-form">
             <input type="hidden" name="reviewId" value=@Model.Id>
             <input class="btn btn-outline-danger" type="submit" value="Deny" />
         </form>
     }
     else
     {
-    <form class="delete-book-form">
+        <form asp-antiforgery="true" class="delete-book-form">
         <input type="hidden" name="bookId" value=@Model.Id>
         <button class="btn btn-outline-danger" type="submit">Remove</button>
     </form>

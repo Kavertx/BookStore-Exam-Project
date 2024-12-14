@@ -18,18 +18,18 @@
     }
     @if (!Model.IsApproved)
     {
-        <form class="approve-book-form">
+        <form asp-antiforgery="true" class="approve-book-form">
             <input type="hidden" name="bookId" value=@Model.Id>
             <input class="btn btn-primary" type="submit" value="Approve" />
         </form>
-        <form class="delete-book-form">
+        <form asp-antiforgery="true" class="delete-book-form">
             <input type="hidden" name="bookId" value=@Model.Id>
             <input class="btn btn-outline-danger delete-book" type="submit" value="Deny" />
         </form>
     }
     else
     {
-        <form class="delete-book-form">
+        <form asp-antiforgery="true" class="delete-book-form">
             <input type="hidden" name="bookId" value=@Model.Id>
             <button class="btn btn-outline-danger" type="submit">Remove</button>
         </form>
@@ -39,6 +39,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         var deleteBookForms = document.querySelectorAll('.delete-book-form');
         deleteBookForms.forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -56,8 +57,10 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'bookId': bookId
-                        }
+                            'bookId': bookId,
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify({ data: 'value' })
                     })
                         .then(response => {
                             if (response.ok) {
@@ -81,6 +84,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         var approveBookForms = document.querySelectorAll('.approve-book-form');
         approveBookForms.forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -98,7 +102,10 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'bookId': bookId
+                            'bookId': bookId,
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify({ data: 'value' })
                         }
                     })
                         .then(response => {

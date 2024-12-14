@@ -51,7 +51,7 @@
         {
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="card">
-                    <form class="delete-book-form">
+                    <form asp-antiforgery="true" class="delete-book-form">
                         <partial name="_BookPartial" model="@book" />
                         <input type="hidden" name="bookId" value=@book.Id>
                         <input class="btn btn-outline-danger delete-book" type="submit" value="Remove"/>
@@ -65,6 +65,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         var deleteBookForms = document.querySelectorAll('.delete-book-form');
         deleteBookForms.forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -82,8 +83,10 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'bookId': bookId
-                        }
+                            'bookId': bookId,
+                            'RequestVerificationToken': token
+                        },
+                        body: JSON.stringify({ data: 'value' })
                     })
                         .then(response => {
                             if (response.ok) {
