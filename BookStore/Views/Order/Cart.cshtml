@@ -37,8 +37,7 @@
             }
         </tbody>
     </table>
-    <form asp-antiforgery="true" id="order-form" action="/Order/PlaceOrder" method="post">
-
+    <form asp-antiforgery="true" asp-action="CreateOrder" asp-controller="Order" id="order-form" method="post">
         <button class="btn btn-primary" type="submit">Purchase</button>
     </form>
 }
@@ -106,7 +105,6 @@ else
                             'RequestVerificationToken': token
                         },
                         body: JSON.stringify({ data: 'value' })
-                        },
                         // Empty body as we don't need to send any data
                     })
                         .then(response => {
@@ -126,8 +124,8 @@ else
                             // Handle network errors
                             console.error('Network error:', error);
                         });
-                });
-            }
-        });
+                };
+            };
+        }
     </script>
 }
