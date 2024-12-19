@@ -3,11 +3,11 @@
     ViewBag.Title = "All Book Reviews";
 }
 
-<form asp-antiforgery="true">
+<form asp-controller="Review" asp-action="Index" method="get" asp-antiforgery="true">
     <div class="container-fluid">
         <div class="sidebar form-group">
             <input asp-for="SearchTerm" class="form-control me-2" placeholder="Search" aria-label="Search">
-            <input class="btn btn-outline-success" type="submit" value="Search"></input>
+            <input class="btn btn-outline-success" type="submit" value="Search">
         </div>
     </div>
 </form>

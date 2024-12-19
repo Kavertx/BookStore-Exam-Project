@@ -18,8 +18,7 @@ namespace BookStore.Controllers
             bookService = _bookService;
         }
         [AllowAnonymous]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Index([FromQuery] AllReviewsQueryModel query)
+        public async Task<IActionResult> Index([FromHeader] AllReviewsQueryModel query)
         {
             var model = await reviewService.AllAsync(
                 query.SearchTerm);
@@ -27,7 +26,7 @@ namespace BookStore.Controllers
             query.Reviews = model.Reviews;
             return View(query);
         }
-        [AutoValidateAntiforgeryToken]
+        
         public async Task<IActionResult> Mine([FromQuery]AllReviewsQueryModel query)
         {
             int clientId = await clientService.GetClientIdAsync(User.Id())?? throw new NullReferenceException();
@@ -69,7 +68,7 @@ namespace BookStore.Controllers
         public async Task<IActionResult> Details(int id)
         {
 
-            var model = await reviewService.GetReviewDetailsByIdAsync(id)?? throw new NullReferenceException("Review with id does not exist");
+            var model = await reviewService.GetReviewDetailsByIdAsync(id);//?? throw new NullReferenceException("Review with id does not exist");
             
             return View(model);
         }

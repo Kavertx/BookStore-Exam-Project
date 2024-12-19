@@ -2,12 +2,11 @@
 @inject IClientService clientService
 
 <div class="review-details">
-    <a asp-controller="Review" asp-action="Details" asp-route-id="@Model.Id">
         <img class="details-image" src="@Model.ImageUrl" alt="Book Cover">
         <h2>@Model.Title</h2>
         <p><strong>Author:</strong> @Model.Author</p>
         <p> @Model.ReviewContent</p>
-    </a>
+
     @if(Model.ClientId == await clientService.GetClientIdAsync(User.Id())){
         <a asp-controller="Review" asp-action="Delete" asp-route-id="@Model.Id">
             <input class="btn btn-primary" type="submit" value="Remove review" />

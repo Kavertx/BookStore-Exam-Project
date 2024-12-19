@@ -18,8 +18,7 @@ namespace BookStore.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Index([FromQuery]AllBooksQueryModel query)
+        public async Task<IActionResult> Index([FromHeader]AllBooksQueryModel query)
         {
 
             var model = await bookService.AllAsync(
