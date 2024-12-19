@@ -20,6 +20,8 @@ namespace BookStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index([FromHeader]AllBooksQueryModel query)
         {
+            //will use this to simulate error 500 for the requirement
+            //return StatusCode(StatusCodes.Status500InternalServerError);
 
             var model = await bookService.AllAsync(
                 query.GenreName,
