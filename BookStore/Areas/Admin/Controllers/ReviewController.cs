@@ -52,7 +52,7 @@ namespace BookStore.Areas.Admin.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpPost]
         public async Task<IActionResult> Delete([FromHeader] int reviewId)
         {
             try

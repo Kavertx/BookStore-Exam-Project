@@ -22,8 +22,8 @@
     }
     else
     {
-        <form asp-antiforgery="true" class="delete-book-form">
-        <input type="hidden" name="bookId" value=@Model.Id>
+        <form asp-antiforgery="true" class="delete-review-form">
+        <input type="hidden" name="reviewId" value=@Model.Id>
         <button class="btn btn-outline-danger" type="submit">Remove</button>
     </form>
     }
